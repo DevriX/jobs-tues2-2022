@@ -15,13 +15,13 @@ require 'config.php';
 
     function ConnectDB($con)
     {
-        $host="localhost";
-        $user="neznam";
-        $password="123456789";
-        $dbname="JOB_BOARD";
+        $host=DB_HOST;
+        $user=DB_USER;
+        $password=DB_PASS;
+        $dbname=DB_NAME;
         
-        $con = mysqli_connect($host, $user, $password,$dbname);
-        mysqli_select_db($con, "JOB_BOARD");
+        $con = mysqli_connect($host, $user, $password,$dbname) or die ('Failed connection to database' . mysqli_connect_error());
+        mysqli_select_db($con, $dbname);
 
     }
  
