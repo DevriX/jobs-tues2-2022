@@ -15,18 +15,18 @@
 		<header class="site-header">
 			<div class="row site-header-inner">
 				<div class="site-header-branding">
-					<h1 class="site-title"><a href="index.html">Job Offers</a></h1>
+					<h1 class="site-title"><a href="index.php">Job Offers</a></h1>
 				</div>
 				<nav class="site-header-navigation">
 					<ul class="menu">
 						<li class="menu-item">
-							<a href="index.html">Home</a>					
+							<a href="index.php">Home</a>					
 						</li>
 						<li class="menu-item">
-							<a href="register.html">Register</a>
+							<a href="register.php">Register</a>
 						</li>
 						<li class="menu-item">
-							<a href="login.html">Login</a>					
+							<a href="login.php">Login</a>					
 						</li>
 					</ul>
 				</nav>
