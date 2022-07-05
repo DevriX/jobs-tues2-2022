@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+		include 'header.php';
+	?>
 		<main class="site-main">
 			<section class="section-fullwidth section-login">
 				<div class="row">	
