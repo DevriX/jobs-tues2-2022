@@ -65,12 +65,9 @@
 				</div>
 			</section>	
 		</main>
-
-		<div class="site-wrapper">
-			<?php
-				include 'footer.php';
-			?>
-		</div>	
 	</div>
+	<?php
+			include 'footer.php';
+	?>
 </body>
-</html
+</html>

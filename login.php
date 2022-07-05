@@ -61,9 +61,9 @@
 				</div>
 			</section>	
 		</main>
-		<?php
-			include 'footer.php';
-		?>
 	</div>
+	<?php
+			include 'footer.php';
+	?>
 </body>
 </html>
