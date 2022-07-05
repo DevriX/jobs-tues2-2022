@@ -15,21 +15,21 @@
 		<header class="site-header">
 			<div class="row site-header-inner">
 				<div class="site-header-branding">
-					<h1 class="site-title"><a href="/index.html">Job Offers</a></h1>
+					<h1 class="site-title"><a href="/index.php">Job Offers</a></h1>
 				</div>
 				<nav class="site-header-navigation">
 					<ul class="menu">
 						<li class="menu-item">
-							<a href="/index.html">Home</a>					
+							<a href="index.php">Home</a>					
 						</li>
 						<li class="menu-item current-menu-item">
-							<a href="/dashboard.html">Dashboard</a>
+							<a href="dashboard.php">Dashboard</a>
 						</li>
 						<li class="menu-item">
-							<a href="/profile.html">My Profile</a>					
+							<a href="profile.php">My Profile</a>					
 						</li>
 						<li class="menu-item">
-							<a href="/login.html">Sign Out</a>					
+							<a href="login.php">Sign Out</a>					
 						</li>
 					</ul>
 				</nav>
@@ -136,17 +136,17 @@
 		<footer class="site-footer">
 			<div class="row">
 				<p>Copyright 2020 | Developer links: 
-					<a href="/index.html">Home</a>,
-					<a href="/dashboard.html">Jobs Dashboard</a>,
-					<a href="/single.html">Single</a>,
-					<a href="/login.html">Login</a>,
-					<a href="/register.html">Register</a>,
-					<a href="/submissions.html">Submissions</a>,
-					<a href="/apply-submission.html">Apply Submission</a>,
-					<a href="/view-submission.html">Delete Submission</a>,
-					<a href="/actions-job.html">Create-Edit Job</a>,
-					<a href="/category-dashboard.html">Category Dashboard</a>,
-					<a href="/profile.html">My Profile</a>
+					<a href="index.php">Home</a>,
+					<a href="dashboard.php">Jobs Dashboard</a>,
+					<a href="single.php">Single</a>,
+					<a href="login.php">Login</a>,
+					<a href="register.php">Register</a>,
+					<a href="submissions.php">Submissions</a>,
+					<a href="apply-submission.php">Apply Submission</a>,
+					<a href="view-submission.php">View Submission</a>,
+					<a href="actions-job.php">Create-Edit Job</a>,
+					<a href="category-dashboard.php">Category Dashboard</a>,
+					<a href="profile.php">My Profile</a>
 				</p>
 			</div>
 		</footer>
