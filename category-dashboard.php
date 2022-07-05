@@ -15,7 +15,7 @@
 		<header class="site-header">
 			<div class="row site-header-inner">
 				<div class="site-header-branding">
-					<h1 class="site-title"><a href="/index.php">Job Offers</a></h1>
+					<h1 class="site-title"><a href="index.php">Job Offers</a></h1>
 				</div>
 				<nav class="site-header-navigation">
 					<ul class="menu">
