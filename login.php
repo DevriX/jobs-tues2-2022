@@ -45,6 +45,12 @@
 								<h2 class="heading-title">Login</h2>
 							</div>
 							<form>
+
+							<form action="welcome.php" method="post">
+			Name: <input type="text" name="name"><br>
+E-mail: <input type="text" name="email"><br>
+<input type="submit">
+
 								<div class="form-field-wrapper">
 									<input type="text" placeholder="Email"/>
 								</div>
@@ -61,23 +67,6 @@
 				</div>
 			</section>	
 		</main>
-		<footer class="site-footer">
-			<div class="row">
-				<p>Copyright 2020 | Developer links: 
-					<a href="index.php">Home</a>,
-					<a href="dashboard.php">Jobs Dashboard</a>,
-					<a href="single.php">Single</a>,
-					<a href="login.php">Login</a>,
-					<a href="register.php">Register</a>,
-					<a href="submissions.php">Submissions</a>,
-					<a href="apply-submission.php">Apply Submission</a>,
-					<a href="view-submission.php">View Submission</a>,
-					<a href="actions-job.php">Create-Edit Job</a>,
-					<a href="category-dashboard.php">Category Dashboard</a>,
-					<a href="profile.php">My Profile</a>
-				</p>
-			</div>
-		</footer>
 	</div>
-</body>
-</html>
+	<?php
+		include 'footer.php';?>
