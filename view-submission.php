@@ -66,9 +66,11 @@
 			</section>	
 		</main>
 
-		<?php
-			include 'footer.php';
-		?>
+		<div class="site-wrapper">
+			<?php
+				include 'footer.php';
+			?>
+		</div>	
 	</div>
 </body>
-</html>
+</html
