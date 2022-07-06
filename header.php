@@ -41,7 +41,6 @@
 		<?php
 			include 'db_connection.php';
 			$con = OpenCon();
-			ConnectDB($con);
 			CloseCon($con);
 		?>
 
