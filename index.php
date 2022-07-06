@@ -39,98 +39,35 @@
 							</div>
 						</div>
 					</div>
-					<ul class="jobs-listing">
+
+					<ul class="jobs-listing" action="db_connection.php" method="POST">
+						<?php
+							$jobs = ShowJobs();
+							foreach($jobs as $row){
+						?>
 						<li class="job-card">
 							<div class="job-primary">
-								<h2 class="job-title"><a href="#">Front End Developer</a></h2>
+								<h2 class="job-title"><a href="#"><?php echo  $row["title"] ?></a></h2>
 								<div class="job-meta">
-									<a class="meta-company" href="#">Company Awesome Ltd.</a>
-									<span class="meta-date">Posted 14 days ago</span>
+									<a class="meta-company" href="#"><?php echo  $row["company_name"] ?></a>
+									<span class="meta-date">Posted <?php echo  $row["Date"] ?> days ago</span>
 								</div>
 								<div class="job-details">
-									<span class="job-location">The Hague (The Netherlands)</span>
-									<span class="job-type">Contract staff</span>
+									<span class="job-location"><?php echo  $row["company_location"] ?></span>
+									<span class="job-type"><?php echo  $row["phone_number"] ?></span>
 								</div>
 							</div>
 							<div class="job-logo">
 								<div class="job-logo-box">
-									<img src="https://i.imgur.com/ZbILm3F.png" alt="">
+									<img src=<?php echo  $row["company_image"] ?> alt="">
 								</div>
 							</div>
 						</li>
 
-						<li class="job-card">
-							<div class="job-primary">
-								<h2 class="job-title"><a href="#">Front End Developer</a></h2>
-								<div class="job-meta">
-									<a class="meta-company" href="#">Company Awesome Ltd.</a>
-									<span class="meta-date">Posted 14 days ago</span>
-								</div>
-								<div class="job-details">
-									<span class="job-location">The Hague (The Netherlands)</span>
-									<span class="job-type">Contract staff</span>
-								</div>
-							</div>
-							<div class="job-logo">
-								<div class="job-logo-box">
-									<img src="https://i.imgur.com/ZbILm3F.png" alt="">
-								</div>
-							</div>
-						</li>
-						<li class="job-card">
-							<div class="job-primary">
-								<h2 class="job-title"><a href="#">Front End Developer</a></h2>
-								<div class="job-meta">
-									<a class="meta-company" href="#">Company Awesome Ltd.</a>
-									<span class="meta-date">Posted 14 days ago</span>
-								</div>
-								<div class="job-details">
-									<span class="job-location">The Hague (The Netherlands)</span>
-									<span class="job-type">Contract staff</span>
-								</div>
-							</div>
-							<div class="job-logo">
-								<div class="job-logo-box">
-									<img src="https://i.imgur.com/ZbILm3F.png" alt="">
-								</div>
-							</div>
-						</li>
-						<li class="job-card">
-							<div class="job-primary">
-								<h2 class="job-title"><a href="#">Front End Developer</a></h2>
-								<div class="job-meta">
-									<a class="meta-company" href="#">Company Awesome Ltd.</a>
-									<span class="meta-date">Posted 14 days ago</span>
-								</div>
-								<div class="job-details">
-									<span class="job-location">The Hague (The Netherlands)</span>
-									<span class="job-type">Contract staff</span>
-								</div>
-							</div>
-							<div class="job-logo">
-								<div class="job-logo-box">
-									<img src="https://i.imgur.com/ZbILm3F.png" alt="">
-								</div>
-							</div>
-						</li>
-						<li class="job-card">
-							<div class="job-primary">
-								<h2 class="job-title"><a href="#">Front End Developer</a></h2>
-								<div class="job-meta">
-									<a class="meta-company" href="#">Company Awesome Ltd.</a>
-									<span class="meta-date">Posted 14 days ago</span>
-								</div>
-								<div class="job-details">
-									<span class="job-location">The Hague (The Netherlands)</span>
-									<span class="job-type">Contract staff</span>
-								</div>
-							</div>
-							<div class="job-logo">
-								<div class="job-logo-box">
-									<img src="https://i.imgur.com/ZbILm3F.png" alt="">
-								</div>
-							</div>
-						</li>
+						<?php 
+						} 
+						?>
+						
 					</ul>
 					<div class="jobs-pagination-wrapper">
 						<div class="nav-links"> 
