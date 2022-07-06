@@ -19,7 +19,7 @@ require 'config.php';
         $user=DB_USER;
         $password=DB_PASS;
         $dbname=DB_NAME;
-        
+        git
         $con = mysqli_connect($host, $user, $password,$dbname) or die ('Failed connection to database' . mysqli_connect_error());
         mysqli_select_db($con, $dbname);
 
