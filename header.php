@@ -1,3 +1,7 @@
+<!-- <?php 
+	session_start();
+	var_dump($_SESSION);
+	 ?>-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +44,7 @@
 		<?php
 			include 'db_connection.php';
 			$con = OpenCon();
-			CloseCon($con);
+		//	CloseCon($con);
 		?>
 		</header>
 
