@@ -38,4 +38,3 @@ require 'config.php';
 		// ConnectDB($con);
 		// // echo "Connected Successfully";
 		// CloseCon($con);
-	?>

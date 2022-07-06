@@ -10,7 +10,6 @@
 								<h2 class="heading-title">Login</h2>
 							</div>
 							<form>
-
 								<div class="form-field-wrapper">
 									<input type="text" placeholder="Email"/>
 								</div>
