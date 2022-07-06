@@ -45,6 +45,9 @@
 								<h2 class="heading-title">Login</h2>
 							</div>
 							<form>
+
+
+
 								<div class="form-field-wrapper">
 									<input type="text" placeholder="Email"/>
 								</div>
@@ -61,9 +64,6 @@
 				</div>
 			</section>	
 		</main>
-		<?php
-			include 'footer.php';
-		?>
 	</div>
-</body>
-</html>
+	<?php
+		include 'footer.php';?>

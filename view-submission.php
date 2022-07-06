@@ -65,10 +65,6 @@
 				</div>
 			</section>	
 		</main>
-
-		<?php
-			include 'footer.php';
-		?>
 	</div>
-</body>
-</html>
+	<?php
+			include 'footer.php';?>
