@@ -16,7 +16,7 @@ require 'config.php';
     function ShowJobs()
     {
         $con = OpenCon();
-        
+
         $sql = "SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) AS 'Date', users.phone_number, users.company_name, users.company_location, users.company_image FROM jobs JOIN users ON users.id = jobs.user_id";
         $result = mysqli_query($con, $sql);  
         
@@ -26,9 +26,7 @@ require 'config.php';
             $jobs[$count] = $row;
             $count = $count + 1;
         }
-
-        // echo "id: " . $row["id"]. "  title: " . $row["title"]. "date_posted " . $row["date_posted"]. "phone_number: " . $row["phone_number"]. "comapany_name: " . $row["company_name"]. "company_image: " . $row["company_image"]."<br>";
-
+git
         return $jobs;
     }
  
