@@ -16,8 +16,6 @@
             Wrong email or password!
         </div>';
         }
-            
-             //"error";
          
     }
 
