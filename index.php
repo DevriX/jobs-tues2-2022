@@ -40,10 +40,11 @@
 						</div>
 					</div>
 
-					<ul class="jobs-listing" action="db_connection.php" method="POST">
+					<ul class="jobs-listing">
 						<?php
 							$jobs = ShowJobs();
-							foreach($jobs as $row){
+							if(!empty($jobs)){ 
+								foreach($jobs as $row){
 						?>
 						<li class="job-card">
 							<div class="job-primary">
@@ -65,7 +66,8 @@
 						</li>
 
 						<?php 
-						} 
+							} 
+						}
 						?>
 						
 					</ul>
