@@ -51,7 +51,20 @@
 								<h2 class="job-title"><a href="#"><?php echo  $row["title"] ?></a></h2>
 								<div class="job-meta">
 									<a class="meta-company" href="#"><?php echo  $row["company_name"] ?></a>
+									<!-- <input >  </input> -->
+									<?php
+									if($row["Date"] == 0) {
+									?>
+									<span class="meta-date">Today</span>
+									<?php
+										} else if($row["Date"] == 1){ 
+									?>
+									<span class="meta-date">Yesterday</span>
+									<?php 
+										}else {
+											?>
 									<span class="meta-date">Posted <?php echo  $row["Date"] ?> days ago</span>
+									<?php } ?>
 								</div>
 								<div class="job-details">
 									<span class="job-location"><?php echo  $row["company_location"] ?></span>
@@ -60,7 +73,7 @@
 							</div>
 							<div class="job-logo">
 								<div class="job-logo-box">
-									<img src=<?php echo  $row["company_image"] ?> alt="">
+									<img src=<?php echo "/uploads/company_images/" .$row["company_image"] ?> alt="">
 								</div>
 							</div>
 						</li>
