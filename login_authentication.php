@@ -9,11 +9,16 @@
         $count = mysqli_num_rows($result);  
             
         if($count == 1){
-            header("Location: http://local.job-board.com/dashboard.php");
+            header("Location: http://local.job-board.com/index.php");
         }  
-        else {  
-            echo "error";
-        }  
+        else {
+            echo '<div class="alert alert-danger" style=color:red>
+            Wrong email or password!
+        </div>';
+        }
+            
+             //"error";
+         
     }
 
     
