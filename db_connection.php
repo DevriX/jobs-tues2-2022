@@ -27,7 +27,21 @@ require 'config.php';
         }
         return $jobs;
     }
- 
+
+    function ShowJob($id)
+    {
+        $con = OpenCon();
+
+        $sql = "SELECT jobs.id, jobs.title, jobs.description, jobs.responsibilities, jobs.salary, DATEDIFF( CURDATE(), jobs.date_posted) AS 'Date', users.phone_number, users.company_name, users.company_location, users.company_image, users.company_site FROM jobs JOIN users ON users.id = jobs.user_id";
+        $result = mysqli_query($con, $sql);  
+        
+        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            if($row["id"] == $id){
+                return $row;
+            }
+        }
+    }
+
     function CloseCon($con)
     {
         $con->close();
