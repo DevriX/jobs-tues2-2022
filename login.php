@@ -26,7 +26,7 @@
 							<a href="#" class="button button-inline">Forgot Password</a>
 							<div class="no account">	
 							Don't have an account?
-								<a href="http://local.job-board.com/register.php" class="Register">Register</a><br></br>
+								<a href="register.php" class="Register">Register</a><br></br>
 							</div>
 						</div>
 					</div>
