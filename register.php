@@ -37,7 +37,6 @@
 			}
 			else{
 				$insert_user["first_name"] = test_input($_POST["first_name"]);
-				echo $insert_user["first_name"];
 			}
 
 			if(empty($_POST["last_name"])){
@@ -45,7 +44,6 @@
 			}
 			else{
 				$insert_user["last_name"] = test_input($_POST["last_name"]);
-				echo $insert_user["last_name"];
 			}
 
 			if(empty($_POST["email"])){
@@ -53,7 +51,6 @@
 			}
 			else{
 				$insert_user["email"] = $_POST["email"];
-				echo $insert_user["email"];
 			}
 
 			if(empty($_POST["password"])){
@@ -61,7 +58,6 @@
 			}
 			else{
 				$insert_user["password"] = $_POST["password"];
-				echo $insert_user["password"];
 			}
 
 			if(empty($_POST["repeat_password"])){
@@ -69,7 +65,6 @@
 			}
 			else{
 				$insert_user["repeat_password"] = $_POST["repeat_password"];
-				echo $insert_user["repeat_password"];
 			}
 
 			if(!empty($_POST["phone_number"])){
@@ -96,7 +91,6 @@
 				$insert_user["company_image"] = $_POST["company_image"];
 			}
 
-			var_dump($inserts_error);
 			if(empty($inserts_error)){
 				$sql_request = "INSERT INTO users(email, first_name, last_name, password, phone_number, company_name, company_location, company_site,
 				company_description, company_image, is_admin) VALUES ('".$insert_user['email']."'  ,  '". $insert_user['first_name']."',   '". $insert_user['last_name']."',
