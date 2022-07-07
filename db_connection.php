@@ -9,7 +9,8 @@ require 'config.php';
         $dbname=DB_NAME;
 
     $con = new mysqli($host, $user, $password, $dbname) or die ('Could not connect to the database server' . mysqli_connect_error());
-
+    mysqli_select_db($con, $dbname);
+    
     return $con;
     }
 
@@ -26,7 +27,6 @@ require 'config.php';
             $jobs[$count] = $row;
             $count = $count + 1;
         }
-git
         return $jobs;
     }
  
