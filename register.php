@@ -13,18 +13,17 @@
 		}
 
 		$insert_user = array(
-    		"first_name" => ' ',
-   	 		"last_name"  => ' ',
-			"email"      => ' ',
-			"password"   => ' ',
-			"repeat_password"   => ' ',
+    		"first_name" => '',
+   	 		"last_name"  => '',
+			"email"      => '',
+			"password"   => '',
+			"repeat_password"   => '',
 			"phone_number"     => '',
-			"company_name"     => ' ',
-			"company_location"     => ' ',
-			"company_site"     => ' ',
-			"company_description"  => ' ',
-			"company_image"      => ' '
-
+			"company_name"     => '',
+			"company_location"     => '',
+			"company_site"     => '',
+			"company_description"  => '',
+			"company_image"      => ''
 		);
 
 		$inserts_error = array();
@@ -182,4 +181,3 @@
 		</main>
 	<?php
 			include 'footer.php';?>
-			<?php CloseCon($con);?>	
