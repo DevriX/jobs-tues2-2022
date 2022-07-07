@@ -188,11 +188,4 @@
 		</main>
 	<?php
 			include 'footer.php';?>
-
-
-
-
-
-
-$con = OpenCon();
 			<?php CloseCon($con);?>	
