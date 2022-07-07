@@ -1,5 +1,5 @@
 <?php
-    if (isset($_POST['email']) or isset($_POST['password'])) {
+    if (empty($_POST['email']) or empty($_POST['password'])) {
 
         require_once('db_connection.php');
         $con = OpenCon();
@@ -9,7 +9,7 @@
         $count = mysqli_num_rows($result);  
             
         if($count == 1){
-            header("Location: http://local.job-board.com/index.php");
+            header("Location: index.php");
         }  
         else {
             echo '<div class="alert alert-danger" style=color:red>
