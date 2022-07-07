@@ -41,7 +41,7 @@
 		<?php
 			include 'db_connection.php';
 			$con = OpenCon();
-			CloseCon($con);
+			//	CloseCon($con);
 		?>
 
 		</header>

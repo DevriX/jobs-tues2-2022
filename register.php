@@ -1,5 +1,6 @@
 
 	<?php
+
 		include 'header.php';
 
 
@@ -16,22 +17,17 @@
    	 		"last_name"  => ' ',
 			"email"      => ' ',
 			"password"   => ' ',
+			"repeat_password"   => ' ',
 			"phone_number"     => '',
 			"company_name"     => ' ',
 			"company_location"     => ' ',
 			"company_site"     => ' ',
 			"company_description"  => ' ',
-			//"company_image"      => ' '
+			"company_image"      => ' '
 
 		);
 
-		$inserts_error = array(
-			'first_name_err' => "",
-			'last_name_err'  => "",
-			'email_err'      => "",
-			'password_err'   => "",
-
-		);
+		$inserts_error = array();
 
 	
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -68,6 +64,14 @@
 				echo $insert_user["password"];
 			}
 
+			if(empty($_POST["repeat_password"])){
+				$inserts_error["repeat_password_err"] = "Repeat your password.";
+			}
+			else{
+				$insert_user["repeat_password"] = $_POST["repeat_password"];
+				echo $insert_user["repeat_password"];
+			}
+
 			if(!empty($_POST["phone_number"])){
 				$insert_user["phone_number"] = $_POST["phone_number"];
 			}
@@ -88,21 +92,21 @@
 				$insert_user["company_description"] = $_POST["company_description"];
 			}
 
-		//	if(!empty($_POST["company_image"])){
-		//		$insert_user["company_image"] = $_POST["company_image"];
-		//	}
+			if(!empty($_POST["company_image"])){
+				$insert_user["company_image"] = $_POST["company_image"];
+			}
 
-			
+			var_dump($inserts_error);
 			if(empty($inserts_error)){
-				$sql_request = "INSERT INTO users(id, email, first_name, last_name, password, phone_number, company_name, company_location, company_site,
-				company_description, company_image) VALUES (1, '".insert_user['email']."'  ,  '". insert_user[first_name]."',   '". insert_user['last_name']."',
-				'". insert_user['password']."',  '". insert_user['phone_number']."',  '". insert_user['company_name']."',  '". insert_user['company_location']."',
-				'". insert_user['company_site']."',  '". insert_user['company_description']."'  )";
+				$sql_request = "INSERT INTO users(email, first_name, last_name, password, phone_number, company_name, company_location, company_site,
+				company_description, company_image, is_admin) VALUES ('".$insert_user['email']."'  ,  '". $insert_user['first_name']."',   '". $insert_user['last_name']."',
+				'". $insert_user['password']."',  '". $insert_user['phone_number']."',  '". $insert_user['company_name']."',  '". $insert_user['company_location']."',
+				'". $insert_user['company_site']."',  '". $insert_user['company_description']."' ,'". $insert_user['company_image']."', 0 )";
 
-				if ($conn->query($sql_request) === TRUE) {
+				if ($con->query($sql_request) === TRUE) {
 					echo "Profile created";
 				} else {
-					echo "ERROR: " . $sql_request . "<br>" . $conn->error;
+					echo "ERROR: " . $sql_request . "<br>";
 				}
 			}
 		}
@@ -116,45 +120,60 @@
 							<div class="section-heading">
 								<h2 class="heading-title">Register</h2>
 							</div>
-							<form method="post">
+							<form method="post" action = "">
 								<div class="flex-container justified-horizontally">
 									<div class="primary-container">
 										<h4 class="form-title">About me</h4>
 										<div class="form-field-wrapper">
-											<input type="text" placeholder="First Name*"/>
+											<input type="text" name = "first_name" placeholder="First Name*"/>
+											<?php if(!empty($inserts_error["first_name_err"]))
+												echo "Please enter first name!";
+											?>
 										</div>
 										<div class="form-field-wrapper">
-											<input type="text" placeholder="Last Name*"/>
+											<input type="text"  name = "last_name" placeholder="Last Name*"/>
+											<?php if(!empty($inserts_error["last_name_err"]))
+												echo "Please enter last name!";
+											?>
 										</div>
 										<div class="form-field-wrapper">
-											<input type="text" placeholder="Email*"/>
+											<input type="text" name = "email" placeholder="Email*"/>
+											<?php if(!empty($inserts_error["email_err"]))
+												echo "Please enter email!";
+											?>
 										</div>
 										<div class="form-field-wrapper">
-											<input type="text" placeholder="Password*"/>
+											<input type="text" name = "password" placeholder="Password*"/>
+											<?php if(!empty($inserts_error["password_err"]))
+												echo "Please enter password!";
+											?>
 										</div>
 										<div class="form-field-wrapper">
-											<input type="text" placeholder="Repeat Password*"/>
+											<input type="text" name = "repeat_password" placeholder="Repeat Password*"/>
+											<?php if(!empty($inserts_error["repeat_password_err"]))
+												echo "Please repeat your password!";
+											?>
 										</div>
 										<div class="form-field-wrapper">
-											<input type="text" placeholder="Phone Number"/>
+											<input type="text" name ="phone_number" placeholder="Phone Number"/>
 										</div>
 									</div>
 									<div class="secondary-container">
 										<h4 class="form-title">My Company</h4>
 										<div class="form-field-wrapper">
-											<input type="text" placeholder="Company Name"/>
+											<input type="text" name = "company_name" placeholder="Company Name"/>
 										</div>
 										<div class="form-field-wrapper">
-											<input type="text" placeholder="Company Site"/>
+											<input type="text" name = "company_site" placeholder="Company Site"/>
 										</div>
 										<div class="form-field-wrapper">
-											<input type="text" placeholder="Company Location"/>
+											<input type="text" name = "company_location" placeholder="Company Location"/>
 										</div>
 										<div class="form-field-wrapper">
-											<textarea placeholder="Description"></textarea>
+											<textarea name = "company_description" placeholder="Description"></textarea>
 										</div>
 										<div class="form-field-wrapper">
-											<input type="file" accept="image/png, image/jpeg" name="Company Image">
+											<input type="file" accept="image/png, image/jpeg" name="company_image">
 										</div>
 									</div>		
 								</div>					
@@ -169,3 +188,11 @@
 		</main>
 	<?php
 			include 'footer.php';?>
+
+
+
+
+
+
+$con = OpenCon();
+			<?php CloseCon($con);?>	
