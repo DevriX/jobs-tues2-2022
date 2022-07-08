@@ -1,6 +1,7 @@
 
 	<?php
 		include 'header.php';
+		include "category_add.php" 
 
 	?>
 		<main class="site-main">
@@ -31,13 +32,20 @@
 									</div>			
 								</form>
 								
-							</div><?php include "category_add.php" ?>
+							</div>
 						</div>
 					</div>
+					 
 					<ul class="jobs-listing">
+						<?php
+							$jobs = ShowCategory();
+							if(!empty($jobs)){
+								foreach($jobs as $row){
+							
+						?>
 						<li class="job-card">
 							<div class="job-primary">
-								<h2 class="job-title">Category Name</h2>
+								<h2 class="job-title"><?php echo  $row["title"] ?></h2>
 							</div>
 							<div class="job-secondary centered-content">
 								<div class="job-actions">
@@ -45,47 +53,10 @@
 								</div>
 							</div>
 						</li>
-						<li class="job-card">
-							<div class="job-primary">
-								<h2 class="job-title">Category Name</h2>
-							</div>
-							<div class="job-secondary centered-content">
-								<div class="job-actions">
-									<a href="#" class="button button-inline">Delete</a>
-								</div>
-							</div>
-						</li>
-						<li class="job-card">
-							<div class="job-primary">
-								<h2 class="job-title">Category Name</h2>
-							</div>
-							<div class="job-secondary centered-content">
-								<div class="job-actions">
-									<a href="#" class="button button-inline">Delete</a>
-								</div>
-							</div>
-						</li>
-						<li class="job-card">
-							<div class="job-primary">
-								<h2 class="job-title">Category Name</h2>
-							</div>
-							<div class="job-secondary centered-content">
-								<div class="job-actions">
-									<a href="#" class="button button-inline">Delete</a>
-								</div>
-							</div>
-						</li>
-						<li class="job-card">
-							<div class="job-primary">
-								<h2 class="job-title">Category Name</h2>
-							</div>
-							<div class="job-secondary centered-content">
-								<div class="job-actions">
-									<a href="#" class="button button-inline">Delete</a>
-								</div>
-							</div>
-						</li>
-					</ul>					
+						<?php 
+							} 
+						}
+						?>					
 					<div class="jobs-pagination-wrapper">
 						<div class="nav-links"> 
 							<a class="page-numbers current">1</a> 

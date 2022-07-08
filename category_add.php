@@ -1,7 +1,6 @@
 <?php
-
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $title = $_POST["title"];
+            $title = $_POST['title'];
             if(!empty($title)){
                 $sql_request = "INSERT INTO categories(title) VALUES ('".$title."')";
                     
