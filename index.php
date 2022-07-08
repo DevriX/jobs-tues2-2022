@@ -42,9 +42,21 @@
 
 					<ul class="jobs-listing">
 						<?php
-							$jobs = ShowJobs();
-							if(!empty($jobs)){ 
-								foreach($jobs as $row){
+							$limit = 5;
+
+							if (!isset ($_GET['page']) ) {  
+								$page = 1;  
+							} else {  
+								$page = $_GET['page'];  
+							}
+   
+							$page_first_result = ($page-1) * $limit;
+							$sql = "SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) AS 'Date', users.phone_number, users.company_name, users.company_location, users.company_image FROM jobs JOIN users ON users.id = jobs.user_id ORDER BY jobs.date_posted DESC LIMIT $page_first_result, $limit";
+							$num_rows = mysqli_num_rows ($con->query("SELECT * FROM jobs"));
+ 							$page_total = ceil($num_rows / $limit);
+							$result = mysqli_query($con, $sql); 
+								
+							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {		 
 						?>
 						<li class="job-card">
 							<div class="job-primary">
@@ -76,22 +88,26 @@
 								</div>
 							</div>
 						</li>
-
 						<?php 
-							} 
-						}
+							}
 						?>
 						
 					</ul>
-					<!-- <div class="jobs-pagination-wrapper">
+					<div class="jobs-pagination-wrapper">
 						<div class="nav-links"> 
-							<a class="page-numbers current">1</a> 
-							<a class="page-numbers">2</a> 
-							<a class="page-numbers">3</a> 
-							<a class="page-numbers">4</a> 
-							<a class="page-numbers">5</a> 
+						<?php 
+							for ($i = 1; $i <= $page_total; $i++) {
+								if($i == $page) {
+									printf("<a class='page-numbers current' %shref='index.php?page=%u'>%u</a>", 
+									$i==$page ? : "", $i, $i );
+								} else {
+									printf("<a class='page-numbers' %shref='index.php?page=%u'>%u</a>", 
+									$i==$page ? : "", $i, $i );
+								}
+							} 
+						?>
 						</div>
-					</div> -->
+					</div>
 				</div>
 			</section>	
 		</main>
