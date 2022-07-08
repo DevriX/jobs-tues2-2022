@@ -18,8 +18,8 @@ require 'config.php';
     {
         $con = OpenCon();
 
-        $sql = "SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) AS 'Date', users.phone_number, users.company_name, users.company_location, users.company_image FROM jobs JOIN users ON users.id = jobs.user_id";
-        $result = mysqli_query($con, $sql);  
+        $sql = "SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) AS 'Date', users.phone_number, users.company_name, users.company_location, users.company_image FROM jobs JOIN users ON users.id = jobs.user_id ORDER BY jobs.date_posted DESC";
+        $result = mysqli_query($con, $sql); 
         
         $jobs = array();
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
