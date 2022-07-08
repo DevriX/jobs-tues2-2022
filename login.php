@@ -1,4 +1,4 @@
-	<?php
+<?php
 		include 'header.php';
 	//	include 'login_authentication.php';
 	?>
@@ -19,7 +19,7 @@
 									<input name="password" type="password" placeholder="Password"/>
 								</div>
 								<?php include 'login_authentication.php';?>
-								<button type="submit" class="button">
+								<button type="submit" name = "submit" value="login" class="button">
 									Login
 								</button>	
 							</form>

@@ -125,7 +125,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 			$insert_user["company_image"] = basename( $_FILES["company_image"]["name"]);
 			echo "The file ". htmlspecialchars( basename( $_FILES["company_image"]["name"])). " has been uploaded.";
 		  } else {
-			$inserts_error["company_image_err"] = "Error uploding file!";
 			echo "Sorry, there was an error uploading your file.";
 		  }
 		}
