@@ -50,7 +50,7 @@
 							</div>
 							<div class="job-secondary centered-content">
 								<div class="job-actions">
-									<a href="?id=<?php echo $row['id']; ?>" class="button button-inline">Delete</a>
+									<a href="?cat_id=<?php echo $row['id']; ?>" class="button button-inline">Delete</a>
 								</div>
 							</div>
 						</li>
