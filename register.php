@@ -23,31 +23,13 @@ $inserts_error = array();
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 	//var_dump($_POST);
 
-	 
-	$target_file = IMAGE_PATH . basename($_FILES["company_image"]["name"]);
-	$uploadOk = 1;
-	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-	
-	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-	&& $imageFileType != "gif" ) {
-	  echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-	  $uploadOk = 0;
-	}
-	
-	if ($uploadOk == 0) {
-	  echo "Sorry, your file was not uploaded.";
+	 $flag = 0;
 
-	} else {
-	  if (move_uploaded_file($_FILES["company_image"]["tmp_name"], $target_file)) {
-		echo "The file ". htmlspecialchars( basename( $_FILES["company_image"]["name"])). " has been uploaded.";
-	  } else {
-		echo "Sorry, there was an error uploading your file.";
-	  }
-	}
 
 
 	if(empty($_POST["first_name"])){
 		$inserts_error["first_name_err"] = "First name field required.";
+		$flag = 1;
 	}
 	else{
 		$insert_user["first_name"] = ($_POST["first_name"]);
@@ -55,6 +37,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 
 	if(empty($_POST["last_name"])){
 		$inserts_error["last_name_err"] = "Last name field required.";
+		$flag = 1;
 	}
 	else{
 		$insert_user["last_name"] = ($_POST["last_name"]);
@@ -62,6 +45,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 
 	if(empty($_POST["email"])){
 		$inserts_error["email_err"] = "Email field required.";
+		$flag = 1;
 	}
 	else{
 		$sanitized_email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
@@ -69,16 +53,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 			$insert_user["email"] = ($_POST["email"]);
 		}
 		else{
+			$flag = 1;
 			echo "Sorry! Invalid Email Format! <br>";
 		}	
 	}
 
 	if(empty($_POST["password"])){
 		$inserts_error["password_err"] = "Password field required.";
+		$flag = 1;
 	}
 	else{
 		if(strlen($_POST["password"]) < 8){
 			$inserts_error["password_err"] = " ";
+			$flag = 1;
 			echo "Password should be at least 8 characters!";
 		}
 		$insert_user["password"] = password_hash( $_POST["password"], PASSWORD_DEFAULT);
@@ -86,10 +73,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 
 	if(empty($_POST["repeat_password"])){
 		$inserts_error["repeat_password_err"] = "Repeat your password.";
+		$flag = 1;
 	}
 	else{
 
 		if (strcmp($_POST["password"], $_POST["repeat_password"]) !== 0) {
+			$flag = 1;
 			echo $inserts_error["repeat_password_err"] = "Passwords don't match";
 		}
 		else{
@@ -128,6 +117,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 
 	if(empty($_POST["company_image"])){
 		$insert_user["company_image"] = basename( $_FILES["company_image"]["name"]);
+
+		$target_file = IMAGE_PATH . basename($_FILES["company_image"]["name"]);
+		$uploadOk = 1;
+		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+		
+		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+		&& $imageFileType != "gif" ) {
+		  echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+		  $uploadOk = 0;
+		}
+		
+		if ($uploadOk == 0) {
+		  echo "Sorry, your file was not uploaded.";
+	
+		} else {
+		  if (move_uploaded_file($_FILES["company_image"]["tmp_name"], $target_file) && $flag == 0) {
+			echo "The file ". htmlspecialchars( basename( $_FILES["company_image"]["name"])). " has been uploaded.";
+		  } else {
+			echo "Sorry, there was an error uploading your file.";
+		  }
+		}
 	}
 
 	if(empty($inserts_error)){
