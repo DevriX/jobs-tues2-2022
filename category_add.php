@@ -6,7 +6,7 @@
             $count = mysqli_num_rows($result);  
             
             if($count){
-                echo '<div class="flex-container justified-vertically" style=color:red>Duplicate entry no need to insert into DB</div>'; 
+                echo '<div class="flex-container justified-vertically" style=color:red>This category already exists!</div>'; 
             } else {
 
                 if(!empty($title)){

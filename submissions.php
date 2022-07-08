@@ -1,6 +1,7 @@
 
 	<?php
 		include 'header.php';
+		
 	?>
 
 		<main class="site-main">
