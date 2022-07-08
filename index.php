@@ -57,7 +57,7 @@
 							$result = mysqli_query($con, $sql); 
 								
 							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {	
-								$image_path = "/uploads/company_images/".$row["company_image"];
+								$image_path = IMAGE_PATH.$row["company_image"];
 						?>
 						<li class="job-card">
 							<div class="job-primary">

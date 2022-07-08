@@ -6,7 +6,7 @@
 		<?php 
 			$id = $_GET["id"]; 
 			$row = ShowJob($id);
-			$image_path = "/uploads/company_images/".$row["company_image"];
+			$image_path = IMAGE_PATH.$row["company_image"];
 
 		?>
 		<main class="site-main">
