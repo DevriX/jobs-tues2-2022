@@ -28,5 +28,18 @@ require 'config.php';
     {
         $con->close();
     }
+    function ShowCategory(){
+        $con = OpenCon();
+        
+        $sql = "SELECT * FROM categories";
+        $result = mysqli_query($con, $sql);  
+        
+        $jobs = array();
+        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $jobs[] = $row; 
+        }
+
+        return $jobs;
+    }
    
 ?>
