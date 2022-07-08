@@ -43,11 +43,5 @@
 		<?php
 			include 'db_connection.php';
 			$con = OpenCon();
-<<<<<<< HEAD
-		?> 
-		</header>
-
-=======
 		?>
 		</header>
->>>>>>> b2431b9651cc39578ae4a53e22c3c66711ad9c9d

@@ -32,7 +32,7 @@ require 'config.php';
     function ShowCategory(){
         $con = OpenCon();
         
-        $sql = "SELECT title FROM categories";
+        $sql = "SELECT * FROM categories";
         $result = mysqli_query($con, $sql);  
         
         $jobs = array();
