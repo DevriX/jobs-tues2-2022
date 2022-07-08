@@ -56,7 +56,8 @@
  							$page_total = ceil($num_rows / $limit);
 							$result = mysqli_query($con, $sql); 
 								
-							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {		 
+							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {	
+								$image_path = "/uploads/company_images/".$row["company_image"];
 						?>
 						<li class="job-card">
 							<div class="job-primary">
@@ -84,7 +85,8 @@
 							</div>
 							<div class="job-logo">
 								<div class="job-logo-box">
-									<img src=<?php echo "/uploads/company_images/" .$row["company_image"] ?> alt="">
+									<img src=<?php echo $image_path ?> alt="">
+
 								</div>
 							</div>
 						</li>

@@ -6,6 +6,8 @@
 		<?php 
 			$id = $_GET["id"]; 
 			$row = ShowJob($id);
+			$image_path = "/uploads/company_images/".$row["company_image"];
+
 		?>
 		<main class="site-main">
 			<section class="section-fullwidth">
@@ -52,7 +54,7 @@
 						<aside class="job-secondary">
 							<div class="job-logo">
 								<div class="job-logo-box">
-									<img src=<?php echo "/uploads/company_images/" .$row["company_image"] ?> alt="">
+									<img src=<?php echo $image_path ?> alt="">
 								</div>
 							</div>
 							<a href="view-submission.php" class="button button-wide">Apply now</a>
