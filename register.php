@@ -23,62 +23,39 @@
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
-			// $target_dir = "jobs-tues2\uploads\company_images";
-			// $target_file = $target_dir . basename($_FILES["company_image"]["name"]);
-			// $uploadOk = 1;
-			// $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+			$target_dir = "uploads/company_images/";
+			$target_file = $target_dir . basename($_FILES["company_image"]["name"]);
+			$uploadOk = 1;
+			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 			
 
-			// if(isset($_POST["submit"])) {
-			//   $check = getimagesize($_FILES["company_image"]["tmp_name"]);
-			//   if($check !== false) {
-			// 	echo "File is an image - " . $check["mime"] . ".";
-			// 	$uploadOk = 1;
-			//   } else {
-			// 	echo "File is not an image.";
-			// 	$uploadOk = 0;
-			//   }
-			// }
+			if(isset($_POST["submit"])) {
+			  $check = getimagesize($_FILES["company_image"]["tmp_name"]);
+			  if($check !== false) {
+				echo "File is an image - " . $check["mime"] . ".";
+				$uploadOk = 1;
+			  } else {
+				echo "File is not an image.";
+				$uploadOk = 0;
+			  }
+			} 
 			
-			// if (file_exists($target_file)) {
-			//   echo "Sorry, file already exists.";
-			//   $uploadOk = 0;
-			// }
+			if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+			&& $imageFileType != "gif" ) {
+			  echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+			  $uploadOk = 0;
+			}
 			
-			// if ($_FILES["company_image"]["size"] > 500000) {
-			//   echo "Sorry, your file is too large.";
-			//   $uploadOk = 0;
-			// }
-			
-			// if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-			// && $imageFileType != "gif" ) {
-			//   echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-			//   $uploadOk = 0;
-			// }
-			
-			// if ($uploadOk == 0) {
-			//   echo "Sorry, your file was not uploaded.";
+			if ($uploadOk == 0) {
+			  echo "Sorry, your file was not uploaded.";
 
-			// } else {
-			//   if (move_uploaded_file($_FILES["company_image"]["tmp_name"], $target_file)) {
-			// 	echo "The file ". htmlspecialchars( basename( $_FILES["company_image"]["name"])). " has been uploaded.";
-			//   } else {
-			// 	echo "Sorry, there was an error uploading your file.";
-			//   }
-			// }
-
-
-
-
-
-
-
-
-
-
-
-
-
+			} else {
+			  if (move_uploaded_file($_FILES["company_image"]["tmp_name"], $target_file)) {
+				echo "The file ". htmlspecialchars( basename( $_FILES["company_image"]["name"])). " has been uploaded.";
+			  } else {
+				echo "Sorry, there was an error uploading your file.";
+			  }
+			}
 
 
 			if(empty($_POST["first_name"])){
@@ -161,8 +138,8 @@
 				$insert_user["company_description"] = $_POST["company_description"];
 			}
 
-			if(!empty($_POST["company_image"])){
-				$insert_user["company_image"] = $_POST["company_image"];
+			if(empty($_POST["company_image"])){
+				$insert_user["company_image"] = basename( $_FILES["company_image"]["name"]);
 			}
 
 			if(empty($inserts_error)){
@@ -188,7 +165,7 @@
 							<div class="section-heading">
 								<h2 class="heading-title">Register</h2>
 							</div>
-							<form method="post" action = "" enctype="multipart/form-data">
+							<form method="post" enctype="multipart/form-data">
 								<div class="flex-container justified-horizontally">
 									<div class="primary-container">
 										<h4 class="form-title">About me</h4>
@@ -245,8 +222,7 @@
 										</div>
 									</div>		
 								</div>	
-								<a href="index.php" class="Index"></a><br></br>	
-								<button type = "submit" class="button">
+								<button  type = "submit" class="button" >
 									Register
 								</button>
 							</form>
