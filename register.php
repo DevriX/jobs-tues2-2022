@@ -20,25 +20,13 @@ $insert_user = array(
 
 $inserts_error = array();
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
+	//var_dump($_POST);
 
-
-	$target_dir = "uploads/company_images/";
-	$target_file = $target_dir . basename($_FILES["company_image"]["name"]);
+	 
+	$target_file = IMAGE_PATH . basename($_FILES["company_image"]["name"]);
 	$uploadOk = 1;
 	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-	
-
-	if(isset($_POST["submit"])) {
-	  $check = getimagesize($_FILES["company_image"]["tmp_name"]);
-	  if($check !== false) {
-		echo "File is an image - " . $check["mime"] . ".";
-		$uploadOk = 1;
-	  } else {
-		echo "File is not an image.";
-		$uploadOk = 0;
-	  }
-	} 
 	
 	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 	&& $imageFileType != "gif" ) {
@@ -222,7 +210,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 								</div>
 							</div>		
 						</div>	
-						<button  type = "submit" class="button" >
+						<button  type = "submit"name = "submit" value="register" class="button" >
 							Register
 						</button>
 					</form>
