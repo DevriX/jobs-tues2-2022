@@ -1,6 +1,7 @@
 
 	<?php
 		include 'header.php';
+
 	?>
 		<main class="site-main">
 			<section class="section-fullwidth section-jobs-dashboard">
@@ -18,17 +19,19 @@
 						</div>
 						<div class="secondary-container">
 							<div class="form-box category-form">
-								<form>
+								<form action="" method="POST">
 									<div class="flex-container justified-vertically">									
 										<div class="form-field-wrapper">
-											<input type="text" placeholder="Enter Category Name..."/>
+											<input name="title" type="text" placeholder="Enter Category Name..."/>
 										</div>
-										<button class="button">
-											Add New
-										</button>
-									</div>	
+											<button type="submit" class="button">
+												Add New
+											</button>
+											<br></br>		
+									</div>			
 								</form>
-							</div>
+								
+							</div><?php include "category_add.php" ?>
 						</div>
 					</div>
 					<ul class="jobs-listing">

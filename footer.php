@@ -3,7 +3,6 @@
 				<p>Copyright 2020 | Developer links: 
 					<a href="index.php">Home</a>,
 					<a href="dashboard.php">Jobs Dashboard</a>,
-					<a href="single.php">Single</a>,
 					<a href="login.php">Login</a>,
 					<a href="register.php">Register</a>,
 					<a href="submissions.php">Submissions</a>,

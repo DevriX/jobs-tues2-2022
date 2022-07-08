@@ -1,5 +1,6 @@
-<?php
+	<?php
 		include 'header.php';
+	//	include 'login_authentication.php';
 	?>
 		<main class="site-main">
 			<section class="section-fullwidth section-login">
@@ -9,18 +10,24 @@
 							<div class="section-heading">
 								<h2 class="heading-title">Login</h2>
 							</div>
-							<form>
+							<form name="f1" action="" method="POST">
 								<div class="form-field-wrapper">
-									<input type="text" placeholder="Email"/>
+									
+									<input name="email" type="text" placeholder="Email"/>
 								</div>
 								<div class="form-field-wrapper">
-									<input type="text" placeholder="Password"/>
+									<input name="password" type="password" placeholder="Password"/>
 								</div>
+								<?php include 'login_authentication.php';?>
 								<button type="submit" class="button">
 									Login
-								</button>
+								</button>	
 							</form>
 							<a href="#" class="button button-inline">Forgot Password</a>
+							<div class="no account">	
+							Don't have an account?
+								<a href="register.php" class="Register">Register</a><br></br>
+							</div>
 						</div>
 					</div>
 				</div>
