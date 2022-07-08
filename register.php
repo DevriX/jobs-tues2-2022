@@ -103,7 +103,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 	}
 
 	if(!empty($_FILES["company_image"]["name"])){
-		$insert_user["company_image"] = basename( $_FILES["company_image"]["name"]);
+		
 
 		$target_file = IMAGE_PATH . basename($_FILES["company_image"]["name"]);
 		$uploadOk = 1;
@@ -119,6 +119,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 		  echo "Sorry, your file was not uploaded.";
 	
 		} else {
+			$insert_user["company_image"] = basename( $_FILES["company_image"]["name"]);
 		  if (move_uploaded_file($_FILES["company_image"]["tmp_name"], $target_file) && empty($inserts_error)) {
 			echo "The file ". htmlspecialchars( basename( $_FILES["company_image"]["name"])). " has been uploaded.";
 		  } else {
