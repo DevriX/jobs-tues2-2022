@@ -102,6 +102,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 		$insert_user["company_description"] = $_POST["company_description"];
 	}
 
+
 	if(!empty($_FILES["company_image"]["name"])){
 		
 
@@ -111,6 +112,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 		
 		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 		&& $imageFileType != "gif" ) {
+			$inserts_error["company_image_err"] = "Wrong file format!";
 		  echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
 		  $uploadOk = 0;
 		}
@@ -119,8 +121,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 		  echo "Sorry, your file was not uploaded.";
 	
 		} else {
-			$insert_user["company_image"] = basename( $_FILES["company_image"]["name"]);
 		  if (move_uploaded_file($_FILES["company_image"]["tmp_name"], $target_file) && empty($inserts_error)) {
+			$insert_user["company_image"] = basename( $_FILES["company_image"]["name"]);
 			echo "The file ". htmlspecialchars( basename( $_FILES["company_image"]["name"])). " has been uploaded.";
 		  } else {
 			echo "Sorry, there was an error uploading your file.";
