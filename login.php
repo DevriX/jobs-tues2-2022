@@ -1,6 +1,5 @@
 <?php
 		include 'header.php';
-	//	include 'login_authentication.php';
 	?>
 		<main class="site-main">
 			<section class="section-fullwidth section-login">
@@ -10,13 +9,18 @@
 							<div class="section-heading">
 								<h2 class="heading-title">Login</h2>
 							</div>
-							<form name="f1" action="" method="POST">
+							<form name="f1" action="cookies.php" method="POST">
 								<div class="form-field-wrapper">
 									
-									<input name="email" type="text" placeholder="Email"/>
+									<!--<input name="email" type="text" placeholder="Email"/>-->
+									<input name="email" type="text" placeholder="Email" value="<?php if(isset($_COOKIE["email"])) { echo $_COOKIE["email"]; } ?>" class="input-field">
 								</div>
 								<div class="form-field-wrapper">
-									<input name="password" type="password" placeholder="Password"/>
+									<!--<input name="password" type="password" placeholder="Password"/>-->
+									<input name="password" type="password" placeholder="Password" value="<?php if(isset($_COOKIE["password"])) { echo $_COOKIE["password"]; } ?>" class="input-field">
+								</div>
+								<div class="form-field-wrapper">
+									<input ninput type="checkbox" name="remember"/>Remember me
 								</div>
 								<?php include 'login_authentication.php';?>
 								<button type="submit" name = "submit" value="login" class="button">
