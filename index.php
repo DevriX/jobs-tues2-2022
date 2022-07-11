@@ -1,6 +1,7 @@
 
 	<?php
-		include 'header.php';
+		require_once 'header.php';
+		require_once 'filter_category.php';
 	?>
 		<main class="site-main">
 			<section class="section-fullwidth section-jobs-preview">
@@ -23,12 +24,17 @@
 							}
 						?>
 					</ul>
+					<form name="search" action="" method="GET">
 					<div class="flex-container centered-vertically">
 						<div class="search-form-wrapper">
 							<div class="search-form-field"> 
 								<input class="search-form-input" type="text" value="" placeholder="Search…" name="search" > 
+							
 							</div> 
+					
+							
 						</div>
+						
 						<div class="filter-wrapper">
 							<div class="filter-field-wrapper">
 								<select>
@@ -38,9 +44,14 @@
 									<option value="4">Type</option>
 								</select>
 							</div>
-						</div>
+							
+						</div>		
 					</div>
-
+			
+						<button type="submit" class="button" name="search-button">
+								Search
+							</button>
+						</form>
 					<ul class="jobs-listing">
 						<?php
 							$limit = 5;
@@ -50,9 +61,16 @@
 							} else {  
 								$page = $_GET['page'];  
 							}
-   
 							$page_first_result = ($page-1) * $limit;
-							$sql = "SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) AS 'Date', users.phone_number, users.company_name, users.company_location, users.company_image FROM jobs JOIN users ON users.id = jobs.user_id ORDER BY jobs.date_posted DESC LIMIT $page_first_result, $limit";
+				
+								$sql = search();
+								if(empty($sql)){
+							
+								$sql = "SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) AS 'Date', users.phone_number, users.company_name, users.company_location, users.company_image FROM jobs JOIN users ON users.id = jobs.user_id ORDER BY jobs.date_posted DESC LIMIT $page_first_result, $limit";
+							}
+							
+					
+							//$sql = "SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) AS 'Date', users.phone_number, users.company_name, users.company_location, users.company_image FROM jobs JOIN users ON users.id = jobs.user_id ORDER BY jobs.date_posted DESC LIMIT $page_first_result, $limit";
 							$num_rows = mysqli_num_rows ($con->query("SELECT * FROM jobs"));
  							$page_total = ceil($num_rows / $limit);
 							$result = mysqli_query($con, $sql); 
