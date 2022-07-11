@@ -50,28 +50,33 @@
 			
 						<button type="submit" class="button" name="search-button">
 								Search
-							</button>
+							</button><br></br>
 						</form>
 					<ul class="jobs-listing">
 						<?php
 							$limit = 5;
-
 							if (!isset ($_GET['page']) ) {  
 								$page = 1;  
+								
 							} else {  
-								$page = $_GET['page'];  
+								$page = $_GET['page'];
+								
 							}
 							$page_first_result = ($page-1) * $limit;
-				
-								$sql = search();
-								if(empty($sql)){
+					
+								if(!empty($_GET["search"])){
+									$sql = search();
+									$sql = $sql . " LIMIT $page_first_result, $limit";
+									$num_rows = mysqli_num_rows ($con->query($sql));
+								}
+								
+								else {
 							
 								$sql = "SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) AS 'Date', users.phone_number, users.company_name, users.company_location, users.company_image FROM jobs JOIN users ON users.id = jobs.user_id ORDER BY jobs.date_posted DESC LIMIT $page_first_result, $limit";
+								$num_rows = mysqli_num_rows ($con->query("SELECT * FROM jobs"));
 							}
 							
-					
-							//$sql = "SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) AS 'Date', users.phone_number, users.company_name, users.company_location, users.company_image FROM jobs JOIN users ON users.id = jobs.user_id ORDER BY jobs.date_posted DESC LIMIT $page_first_result, $limit";
-							$num_rows = mysqli_num_rows ($con->query("SELECT * FROM jobs"));
+				
  							$page_total = ceil($num_rows / $limit);
 							$result = mysqli_query($con, $sql); 
 								
@@ -119,12 +124,25 @@
 						<?php 
 							for ($i = 1; $i <= $page_total; $i++) {
 								if($i == $page) {
-									printf("<a class='page-numbers current' %shref='index.php?page=%u'>%u</a>", 
-									$i==$page ? : "", $i, $i );
+									if(isset($_GET['search'])){
+										printf("<a class='page-numbers current' %shref='index.php?search=%s&page=%u'>%u</a>",
+										$i==$page ? : "",$_GET['search'], $i, $i);
+									}else {
+											printf("<a class='page-numbers current' %shref='index.php?page=%u'>%u</a>", 
+											$i==$page ? : "", $i, $i );
+										}
+								
+									
 								} else {
-									printf("<a class='page-numbers' %shref='index.php?page=%u'>%u</a>", 
-									$i==$page ? : "", $i, $i );
+									if(isset($_GET['search'])){
+										printf("<a class='page-numbers' %shref='index.php?search=%s&page=%u'>%u</a>",
+										$i==$page ? : "",$_GET['search'], $i, $i);
+									}else {
+											printf("<a class='page-numbers' %shref='index.php?page=%u'>%u</a>", 
+											$i==$page ? : "", $i, $i );
+										}
 								}
+							
 							} 
 						?>
 						</div>
