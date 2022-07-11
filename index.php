@@ -6,21 +6,22 @@
 			<section class="section-fullwidth section-jobs-preview">
 				<div class="row">	
 					<ul class="tags-list">
-						<li class="list-item">
-							<a href="#" class="list-item-link">IT</a>
+						<?php
+							$category = ShowCategory();
+							if(!empty($category)){
+								foreach($category as $row){
+										
+								
+							?>	
+					<li class="list-item">
+							<a href="#"  class="list-item-link"><?php echo $row['title'];?></a>
+				
 						</li>
-						<li class="list-item">
-							<a href="#" class="list-item-link">Manufactoring</a>
-						</li>
-						<li class="list-item">
-							<a href="#" class="list-item-link">Commerce</a>
-						</li>
-						<li class="list-item">
-							<a href="#" class="list-item-link">Architecture</a>
-						</li>
-						<li class="list-item">
-							<a href="#" class="list-item-link">Marketing</a>
-						</li>
+					
+						<?php		
+								}
+							}
+						?>
 					</ul>
 					<div class="flex-container centered-vertically">
 						<div class="search-form-wrapper">

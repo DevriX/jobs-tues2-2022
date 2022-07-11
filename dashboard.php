@@ -13,7 +13,7 @@
 									<a href="#">Jobs</a>					
 								</li>
 								<li class="menu-item">
-									<a href="#">Categories</a>
+									<a href="category-dashboard.php">Categories</a>
 								</li>
 							</ul>
 						</div>

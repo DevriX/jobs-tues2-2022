@@ -1,6 +1,7 @@
 
 	<?php
-		include 'header.php';
+		include 'header.php'; 
+		include 'category_delete.php';
 
 	?>
 		<main class="site-main">
@@ -10,7 +11,7 @@
 						<div class="primary-container">							
 							<ul class="tabs-menu">
 								<li class="menu-item">
-									<a href="#">Jobs</a>					
+									<a href="dashboard.php">Jobs</a>					
 								</li>
 								<li class="menu-item current-menu-item">
 									<a href="#">Categories</a>
@@ -26,66 +27,37 @@
 										</div>
 											<button type="submit" class="button">
 												Add New
-											</button>
-											<br></br>		
-									</div>			
+											</button>		
+									</div>	
+									<?php include 'category_add.php';?>			
 								</form>
 								
-							</div><?php include "category_add.php" ?>
+							</div>
 						</div>
 					</div>
+					 
 					<ul class="jobs-listing">
+						<?php
+							$category = ShowCategory();
+							if(!empty($category)){
+								foreach($category as $row){
+									
+							
+						?>
 						<li class="job-card">
 							<div class="job-primary">
-								<h2 class="job-title">Category Name</h2>
+								<h2 class="job-title"><?php echo  $row['title'] ?></h2>
 							</div>
 							<div class="job-secondary centered-content">
 								<div class="job-actions">
-									<a href="#" class="button button-inline">Delete</a>
+									<a href="?cat_id=<?php echo $row['id']; ?>" class="button button-inline">Delete</a>
 								</div>
 							</div>
 						</li>
-						<li class="job-card">
-							<div class="job-primary">
-								<h2 class="job-title">Category Name</h2>
-							</div>
-							<div class="job-secondary centered-content">
-								<div class="job-actions">
-									<a href="#" class="button button-inline">Delete</a>
-								</div>
-							</div>
-						</li>
-						<li class="job-card">
-							<div class="job-primary">
-								<h2 class="job-title">Category Name</h2>
-							</div>
-							<div class="job-secondary centered-content">
-								<div class="job-actions">
-									<a href="#" class="button button-inline">Delete</a>
-								</div>
-							</div>
-						</li>
-						<li class="job-card">
-							<div class="job-primary">
-								<h2 class="job-title">Category Name</h2>
-							</div>
-							<div class="job-secondary centered-content">
-								<div class="job-actions">
-									<a href="#" class="button button-inline">Delete</a>
-								</div>
-							</div>
-						</li>
-						<li class="job-card">
-							<div class="job-primary">
-								<h2 class="job-title">Category Name</h2>
-							</div>
-							<div class="job-secondary centered-content">
-								<div class="job-actions">
-									<a href="#" class="button button-inline">Delete</a>
-								</div>
-							</div>
-						</li>
-					</ul>					
+						<?php 
+							} 
+						}
+						?>					
 					<div class="jobs-pagination-wrapper">
 						<div class="nav-links"> 
 							<a class="page-numbers current">1</a> 
