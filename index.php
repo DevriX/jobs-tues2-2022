@@ -52,8 +52,8 @@
 							}
    
 							$page_first_result = ($page-1) * $limit;
-							$sql = "SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) AS 'Date', users.phone_number, users.company_name, users.company_location, users.company_image FROM jobs JOIN users ON users.id = jobs.user_id ORDER BY jobs.date_posted DESC LIMIT $page_first_result, $limit";
-							$num_rows = mysqli_num_rows ($con->query("SELECT * FROM jobs"));
+							$sql = "SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) AS 'Date', users.phone_number, users.company_name, users.company_location, users.company_image FROM jobs JOIN users ON users.id = jobs.user_id WHERE jobs.status = 1 ORDER BY jobs.date_posted DESC LIMIT $page_first_result, $limit";
+							$num_rows = mysqli_num_rows ($con->query("SELECT * FROM jobs WHERE jobs.status = 1"));
  							$page_total = ceil($num_rows / $limit);
 							$result = mysqli_query($con, $sql); 
 								
