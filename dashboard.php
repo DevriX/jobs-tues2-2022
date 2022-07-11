@@ -87,11 +87,11 @@
 									<?php
 										if($row["status"] == 0) {
 									?>
-									<a href="?id=<?php echo $row['id']; ?>" class="button button-inline">Approve</a>
+									<a href="?id=<?php echo $row['id']; ?>&status=<?php echo 1?>" class="button button-inline">Approve</a>
 									<?php
 										} else {
 									?>
-									<a href="?id=<?php echo $row['id']; ?>" class="button button-inline">Reject</a>
+									<a href="?id=<?php echo $row['id']; ?>&status=<?php echo 0?>" class="button button-inline">Reject</a>
 									  <?php
 										}
 									?>
