@@ -19,7 +19,8 @@
 
             require_once('db_connection.php');
             $con = OpenCon();
-            $sql = "select id from users where email = '".$_POST['email']."' and password = '".check_hash($_POST["password"], $db_pass)."' LIMIT 1";  
+            $sql = "select id from users where email = '".$_POST['email']."' and password = '".check_hash($_POST["password"], $db_pass)."' LIMIT 1"; 
+            //$sql = "select id from users where email = '".$_POST['email']."' and password = '" .$db_pass."' LIMIT 1";   
             $result = mysqli_query($con, $sql);  
             $row = mysqli_fetch_array($result, MYSQLI_ASSOC);  
             $count = mysqli_num_rows($result);  
