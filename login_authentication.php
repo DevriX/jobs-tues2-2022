@@ -15,8 +15,7 @@
             $db_hash1 = "select users.password from users where email = '".$_POST['email']."' LIMIT 1"; 
             $result1 = mysqli_query($con1, $db_hash1);  
             $row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC);  
-            $count1 = mysqli_num_rows($result1);  
-            $db_pass = implode($row1);
+            $db_pass = $row1["password"];
 
             require_once('db_connection.php');
             $con = OpenCon();
