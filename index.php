@@ -65,7 +65,8 @@
 					<div class="flex-container centered-vertically">
 						<div class="search-form-wrapper">
 							<div class="search-form-field"> 
-								<input class="search-form-input" type="text" value="" placeholder="Search…" name="search" > 
+								<input class="search-form-input" type="text" value=<?php echo $_GET['search']?> placeholder="Search…" name="search" > 
+
 							
 							</div> 
 							
@@ -148,29 +149,20 @@
 						<?php 
 							if(!empty($page_total)){
 								for ($i = 1; $i <= $page_total; $i++) {
+									$current = '';
 									if($i == $page) {
-										if(isset($_GET['search'])){
-											printf("<a class='page-numbers current' %shref='index.php?search=%s&page=%u'>%u</a>",
-											$i==$page ? : "", $_GET['search'], $i, $i);
-										} else {
-												printf("<a class='page-numbers current' %shref='index.php?&page=%u'>%u</a>", 
-												$i==$page ? : "", $i, $i );
-											}
-									
-										
+										$current = 'current';
+									}
+									if(isset($_GET['search'])){
+					
+										printf("<a class='page-numbers %s' %shref='index.php?search=%s&page=%u'>%u</a>", $current,
+										$i==$page ? : "", $_GET['search'], $i, $i);
 									} else {
-										if(isset($_GET['search'])){
-											printf("<a class='page-numbers' %shref='index.php?search=%s&page=%u'>%u</a>",
-											$i==$page ? : "",$_GET['search'], $i, $i);
-										} else {
-												printf("<a class='page-numbers' %shref='index.php?page=%u'>%u</a>", 
-												$i==$page ? : "", $i, $i );
-											}
+											printf("<a class='page-numbers %s' %shref='index.php?&page=%u'>%u</a>", $current,
+											$i==$page ? : "", $i, $i );
 									}
 								}
-							}
-							
-							
+							}	
 						?>
 						</div>
 					</div>
