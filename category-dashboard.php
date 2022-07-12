@@ -38,11 +38,20 @@
 					 
 					<ul class="jobs-listing">
 						<?php
-							$category = ShowCategory();
-							if(!empty($category)){
-								foreach($category as $row){
-									
+							$limit = 5;
+							if (!isset ($_GET['page']) ) {  
+								$page = 1;  
+							} else {  
+								$page = $_GET['page'];  
+							}
 							
+							$page_first_result = ($page-1) * $limit;
+							$sql = "SELECT id, title FROM categories ORDER BY title ASC LIMIT $page_first_result, $limit";
+							$num_rows = mysqli_num_rows ($con->query("SELECT * FROM categories"));
+							$page_total = ceil($num_rows / $limit);
+							$result = mysqli_query($con, $sql); 
+							
+							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 						?>
 						<li class="job-card">
 							<div class="job-primary">
@@ -56,15 +65,21 @@
 						</li>
 						<?php 
 							} 
-						}
+						
 						?>					
 					<div class="jobs-pagination-wrapper">
 						<div class="nav-links"> 
-							<a class="page-numbers current">1</a> 
-							<a class="page-numbers">2</a> 
-							<a class="page-numbers">3</a> 
-							<a class="page-numbers">4</a> 
-							<a class="page-numbers">5</a> 
+						<?php 
+							for ($i = 1; $i <= $page_total; $i++) {
+								if($i == $page) {
+									printf("<a class='page-numbers current' %shref='category-dashboard.php?page=%u'>%u</a>", 
+									$i==$page ? : "", $i, $i );
+								} else {
+									printf("<a class='page-numbers' %shref='category-dashboard.php?page=%u'>%u</a>", 
+									$i==$page ? : "", $i, $i );
+								}
+							} 
+						?>
 						</div>
 					</div>
 				</div>
