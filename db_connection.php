@@ -43,5 +43,16 @@ require 'config.php';
 
         return $jobs;
     }
+
+    function ShowUser($id)
+    {
+        $con = OpenCon();
+        $sql = "SELECT * FROM users WHERE users.id = $id";
+        $result = mysqli_query($con, $sql);  
+        
+        $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+        return $user;
+    }
    
 ?>
