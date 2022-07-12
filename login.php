@@ -13,14 +13,14 @@
 								<div class="form-field-wrapper">
 									
 									<input name="email" type="text" placeholder="Email"/>
-									<!-- <input name="email" type="text" placeholder="Email" value="<?php if(isset($_COOKIE["email"])) { echo $_COOKIE["email"]; } ?>" class="input-field"> -->
+									<!-- <input name="email" type="text" placeholder="Email" value="<?php// if(isset($_COOKIE["email"])) { echo $_COOKIE["email"]; } ?>" class="input-field"> -->
 								</div>
 								<div class="form-field-wrapper">
 									<input name="password" type="password" placeholder="Password"/>
-									<!-- <input name="password" type="password" placeholder="Password" value="<?php if(isset($_COOKIE["password"])) { echo $_COOKIE["password"]; } ?>" class="input-field"> -->
+									<!-- <input name="password" type="password" placeholder="Password" value="//<?php// if(isset($_COOKIE["password"])) { echo $_COOKIE["password"]; } ?>" class="input-field"> -->
 								</div>
 								<div class="form-field-wrapper">
-									<input ninput type="checkbox" name="remember"/>Remember me
+									<input ninput type="checkbox" name="remember" value = 1  />Remember me
 								</div>
 								<?php include 'login_authentication.php';?>
 								<button type="submit" name = "submit" value="login" class="button">

@@ -1,18 +1,21 @@
 
 	<?php
-		include 'header.php';
-		if(!isset($_COOKIE["login"]))// $_COOKIE is a variable and login is a cookie name 
+		 include 'header.php';
+		if(!isset($_COOKIE["login"])){// $_COOKIE is a variable and login is a cookie name 
 			header("location:login.php"); 
-			echo "GOOD JOB!!! <3"
+			echo "GOOD JOB!!! <3";
+		}
 
 	?>
 
-	<a href=<?php
-							setcookie("login","",time()-1);//for delete the cookie //destroy the cookie 
-							header("location:register.php");
-							//echo("KIWI");
-							// ?>>Sign Out</a>
-
+	<form action = "signout.php">
+		<button class="button">
+			Sign out
+		</button>
+	</form>
+		
+		
+	
 
 		<main class="site-main">
 			<section class="section-fullwidth section-jobs-preview">
