@@ -65,9 +65,11 @@
 							$page_first_result = ($page-1) * $limit;
 					
 								if(!empty($_GET["search"])){
+									$query = $_GET["search"];
 									$sql = search();
-									$sql = $sql . " LIMIT $page_first_result, $limit";
-									$num_rows = mysqli_num_rows ($con->query($sql));
+									$sql = $sql . " LIMIT " . $page_first_result . $limit;
+									$num_rows = mysqli_num_rows ($con->query("SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) AS 'Date', users.phone_number, users.company_name, users.company_location, users.company_image FROM jobs JOIN users ON users.id = jobs.user_id WHERE (jobs.title LIKE '%".$query."%') ORDER BY jobs.date_posted DESC"));
+
 								}
 								
 								else {
@@ -77,9 +79,20 @@
 							}
 							
 				
+							if($_SERVER["REQUEST_METHOD"] == "GET" && !empty($_GET["search"])){
+								$query = $_GET['search']; 
+								$sql = "SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) AS 'Date', users.phone_number, users.company_name, users.company_location, users.company_image FROM jobs JOIN users ON users.id = jobs.user_id WHERE (jobs.title LIKE '%".$query."%') ORDER BY jobs.date_posted DESC LIMIT $page_first_result, $limit";
+								$num_rows = mysqli_num_rows ($con->query("SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) AS 'Date', users.phone_number, users.company_name, users.company_location, users.company_image FROM jobs JOIN users ON users.id = jobs.user_id WHERE (jobs.title LIKE '%".$query."%') ORDER BY jobs.date_posted DESC"));
+
+							} else {
+								$sql = "SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) AS 'Date', users.phone_number, users.company_name, users.company_location, users.company_image FROM jobs JOIN users ON users.id = jobs.user_id ORDER BY jobs.date_posted DESC LIMIT $page_first_result, $limit";
+								$num_rows = mysqli_num_rows ($con->query("SELECT * FROM jobs"));
+							}
+
+							
  							$page_total = ceil($num_rows / $limit);
 							$result = mysqli_query($con, $sql); 
-								
+						
 							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {	
 								$image_path = IMAGE_PATH.$row["company_image"];
 						?>
@@ -126,9 +139,9 @@
 								if($i == $page) {
 									if(isset($_GET['search'])){
 										printf("<a class='page-numbers current' %shref='index.php?search=%s&page=%u'>%u</a>",
-										$i==$page ? : "",$_GET['search'], $i, $i);
-									}else {
-											printf("<a class='page-numbers current' %shref='index.php?page=%u'>%u</a>", 
+										$i==$page ? : "", $_GET['search'], $i, $i);
+									} else {
+											printf("<a class='page-numbers current' %shref='index.php?&page=%u'>%u</a>", 
 											$i==$page ? : "", $i, $i );
 										}
 								
@@ -137,7 +150,7 @@
 									if(isset($_GET['search'])){
 										printf("<a class='page-numbers' %shref='index.php?search=%s&page=%u'>%u</a>",
 										$i==$page ? : "",$_GET['search'], $i, $i);
-									}else {
+									} else {
 											printf("<a class='page-numbers' %shref='index.php?page=%u'>%u</a>", 
 											$i==$page ? : "", $i, $i );
 										}
