@@ -58,7 +58,7 @@
 									<img src=<?php echo $image_path ?> alt="">
 								</div>
 							</div>
-							<a href="apply-submission.php" class="button button-wide">Apply now</a>
+							<a href="apply-submission.php?id=<?php echo $row["id"]?>" class="button button-wide">Apply now</a>
 							<a href="<?php echo  $row["company_site"] ?>" target="_blank"><?php echo  $row["company_site"] ?></a>
 						</aside>
 					</div>
