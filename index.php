@@ -63,6 +63,7 @@
 								
 							}
 							$page_first_result = ($page-1) * $limit;
+<<<<<<< HEAD
 					
 								if(!empty($_GET["search"])){
 									$query = $_GET["search"];
@@ -89,7 +90,7 @@
 								$num_rows = mysqli_num_rows ($con->query("SELECT * FROM jobs"));
 							}
 
-							
+						
  							$page_total = ceil($num_rows / $limit);
 							$result = mysqli_query($con, $sql); 
 						
