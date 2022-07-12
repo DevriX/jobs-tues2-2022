@@ -65,7 +65,7 @@
 					<div class="flex-container centered-vertically">
 						<div class="search-form-wrapper">
 							<div class="search-form-field"> 
-								<input class="search-form-input" type="text" value=<?php echo $_GET['search']?> placeholder="Search…" name="search" > 
+								<input class="search-form-input" type="text" value="<?php if(!empty($_GET['search'])){echo $_GET['search'];}?>" placeholder="Search…" name="search" > 
 
 							
 							</div> 
@@ -162,7 +162,8 @@
 											$i==$page ? : "", $i, $i );
 									}
 								}
-							}	
+							}
+					
 						?>
 						</div>
 					</div>
