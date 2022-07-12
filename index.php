@@ -63,7 +63,6 @@
 								
 							}
 							$page_first_result = ($page-1) * $limit;
-<<<<<<< HEAD
 					
 								if(!empty($_GET["search"])){
 									$query = $_GET["search"];
