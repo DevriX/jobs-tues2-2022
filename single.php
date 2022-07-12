@@ -38,8 +38,8 @@
 										</div>
 										<div class="job-details">
 											<span class="job-location"><?php echo  $row["company_location"] ?></span>
-											<span class="job-type"><?php echo  $row["phone_number"] ?></span>
-											<span class="job-price"><?php echo  $row["salary"] ?>.</span>
+											<span class="job-type"><?php echo 'Contact: '. $row["phone_number"] ?></span>
+											<span class="job-price"><?php echo 'Salary: '. $row["salary"] ?></span>
 										</div>
 									</header>
 
