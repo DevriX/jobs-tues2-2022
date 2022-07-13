@@ -18,11 +18,12 @@
 							<input name="password" type="password" placeholder="Password"/>
 						</div>
 						<div class="form-field-wrapper">
-							<input ninput type="checkbox" name="remember" value = 1  />Remember me
+							<input type="checkbox" name="remember" value = 1  />Remember me
 						</div>
 
 						<?php 
-						include 'login_authentication.php';
+						 //include 'login_authentication.php';
+						 //include 'cookies.php';
 						?>
 
 						<button type="submit" name = "submit" value="login" class="button">

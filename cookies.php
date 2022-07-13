@@ -1,5 +1,5 @@
 <?php
-include "db_connection.php";
+require_once "db_connection.php";
 
 function check_hash($log_hash, $db_hash){
     if(password_verify($log_hash, $db_hash) == true){
@@ -10,44 +10,41 @@ function check_hash($log_hash, $db_hash){
 
 
 $cser=OpenCon() or die("connection failed:".mysqli_error());
-if(isset($_REQUEST['submit'])){
-    $a = $_REQUEST['email'];
-    $b = $_REQUEST['password'];
-    $res2 = mysqli_query($cser,"select password from users where email='$a'");
+
+if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "login" && !empty($_POST['email']) && !empty($_POST["password"])){
+
+    $res2 = mysqli_query($cser,"select* from users where email='".$_REQUEST['email']."'");
     $db_pass=mysqli_fetch_array($res2);
-    $c = check_hash($b, $db_pass["password"]);
+    $c = check_hash($_REQUEST['password'], $db_pass["password"]);
 
-    $res = mysqli_query($cser,"select* from users where email='$a'and password='$c'");
-    $result=mysqli_fetch_array($res);
+    if ($c == 0){
+        echo "Wrong password";
+        header("Location: login.php");
+        echo '<div class="alert alert-danger" style=color:red>
+                Wrong email or password!
+            </div>';
+        return;
+    }
 
-    $result_id = intval($result['id']);
-    $hash_id = MD5($result_id);
-        
-    $end_date = date('Y-m-d', strtotime("today". ' + 1 month'));
-     
-    $res123 = mysqli_query($cser,"select * from cookies where user_id = '".$result_id."'");
-    $result123=mysqli_fetch_array($res123);
+    $user_id = intval($db_pass['id']);
+    $hash_id = MD5(uniqid());
 
-    if($_POST['remember'] == 1){
-        if($result123 == NULL){
-            $sql_request = "INSERT INTO cookies(user_id, hash_id , end_date) VALUES ('".$result_id."', '". $hash_id."', '".$end_date."')";
-    
-            if ($cser->query($sql_request) === TRUE) {
-                setcookie("login",$hash_id,strtotime($end_date));
-                header("location:index.php"); 
-            } 
-            else{
-                echo "ERROR: " . $sql_request . "<br>";
-            }
-        }
-        else{
-            setcookie("login",$hash_id,strtotime($end_date));
-            header("location:index.php"); 
-        }
+    if(isset($_POST["remember"])){
+        $end_date = date('Y-m-d', strtotime("today". ' + 1 month')); 
+        var_dump($end_date)  ;
+        //die();
     }
     else{
-        include "login_authentication.php";
+        $end_date = date(0);
     }
-
+    $sql_request = "INSERT INTO cookies(user_id, hash_id , end_date) VALUES ('".$user_id."', '". $hash_id."', '".$end_date."')";
+    $cser->query($sql_request);
+    setcookie("login",$hash_id,strtotime($end_date));
+    header("Location: index.php");
+}
+else{
+    echo '<div class="alert alert-danger" style=color:red>
+            Please insert email or password!
+        </div>';
 }
 ?>
