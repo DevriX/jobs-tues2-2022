@@ -1,5 +1,4 @@
 <?php
-//$CHECK_LOGIN = 0; 
 	session_start();
 
 ?>
@@ -33,9 +32,22 @@
 						<li class="menu-item">
 							<a href="profile.php">My Profile</a>					
 						</li>
+						<?php 
+						if(isset($_COOKIE["login"]) || isset($_COOKIE["login_one_time"]) ){
+						?> 
 						<li class="menu-item">
 							<a href="signout.php">Sign Out</a>					
 						</li>
+						<?php
+						}
+						if(!isset($_COOKIE["login"]) && !isset($_COOKIE["login_one_time"]) ){
+						?> 
+						<li class="menu-item">
+							<a href="login.php">Log In</a>					
+						</li>
+						<?php
+						}
+						?>
 					</ul>
 				</nav>
 				<button class="menu-toggle">
