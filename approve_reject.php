@@ -1,15 +1,15 @@
 <?php
     require_once 'db_connection.php';
+    
+    $con = OpenCon();
 
-    if($_SERVER["REQUEST_METHOD"] == "GET"){
-        
-        if(!empty($_GET['id'])){
-            $id = $_GET['id'];  
-            $status = $_GET['status'];
+    if(!empty($_POST['id'])){
+        $id = $_POST['id'];  
+        $status = $_POST['status'];
 
-            $sql = "UPDATE jobs SET jobs.status = $status WHERE id = $id";
-            $con->query($sql);
-            header('location: dashboard.php');
-        }
+        $sql = "UPDATE jobs SET jobs.status = $status WHERE id = $id";
+        $res = $con->query($sql);
+        echo $res;
+        die();
     }
 ?>
