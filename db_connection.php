@@ -43,5 +43,16 @@ require 'config.php';
 
         return $jobs;
     }
+
+    function ShowUser($id)
+    {
+        $con = OpenCon();
+        $sql = "SELECT * FROM cookies JOIN users ON users.id = cookies.user_id WHERE cookies.hash_id = $id";
+        $result = mysqli_query($con, $sql);  
+        
+        $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+        return $user;
+    }
    
 ?>
