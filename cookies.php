@@ -9,7 +9,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "login" && !empt
     $res2 = mysqli_query($cser,"select* from users where email='".$_REQUEST['email']."'");
     $db_pass=mysqli_fetch_array($res2);
 
-    if (!password_verify($log_hash, $db_hash)){
+    if (!password_verify($_REQUEST['password'], $db_pass['password'])){
         echo "Wrong password";
         header("Location: login.php");
         echo '<div class="alert alert-danger" style=color:red>
