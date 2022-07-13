@@ -4,9 +4,8 @@
 		$id = $_GET["id"];
 		$job = ShowJob($id);
 		$user_id = $_GET["user_id"]; 
+		// $user_id = $_COOKIE["user_id"]; 
 		$user = ShowUser($user_id);
-		var_dump($user);
-
 
 		$insert_user = array(
 			"custom_message"  => '',
@@ -15,7 +14,7 @@
 
 		$inserts_error = array();
 
-		if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
+		if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "apply"){
 			if(empty($_POST["custom_message"])){
 				$inserts_error["custom_message_err"] = "Custom message field required.";
 			}
@@ -25,7 +24,6 @@
 
 			if(!empty($_FILES["cv"]["name"])){
 		
-
 				$pname = $_FILES["cv"]["name"]; 
 				$tname=$_FILES["cv"]["tmp_name"];
 			  
@@ -41,9 +39,9 @@
 		
 				$target_file = CV_PATH.'/'.$pname;
 				$uploadOk = 1;
-				$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+				$cvFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 				
-				if($imageFileType != "docx" && $imageFileType != "pdf") {
+				if($cvFileType != "docx" && $cvFileType != "pdf") {
 					$inserts_error["company_image_err"] = "Wrong file format!";
 				  echo "Sorry, only DOCX & PDF files are allowed.";
 				  $uploadOk = 0;
@@ -64,12 +62,10 @@
 			}
 
 			if(empty($inserts_error)){
-				$sql_request = "INSERT INTO applications(user_id, job_id, custom_message, cv) VALUES ('".$insert_user['email']."'  ,  '". $insert_user['first_name']."',   '". $insert_user['last_name']."',
-				'". $insert_user['password']."',  '". $insert_user['phone_number']."',  '". $insert_user['company_name']."',  '". $insert_user['company_location']."',
-				'". $insert_user['company_site']."',  '". $insert_user['company_description']."' ,'". $insert_user['company_image']."', '". $insert_user['is_admin']."' )";
-		
+				$sql_request = "INSERT INTO applications(user_id, job_id, custom_message, cv) VALUES ('".$user['id']."',  '". $job['id']."',  '". $insert_user['custom_message']."' ,'". $insert_user['cv']."')";
+
 				if ($con->query($sql_request) === TRUE) {
-					echo "Application submited";
+					echo "Application submited.";
 				} else {
 					echo "ERROR: " . $sql_request . "<br>";
 				}
@@ -85,7 +81,7 @@
 								<h2 class="heading-title">Submit application to
 									<?php echo $job["title"]?></h2>
 							</div>
-							<form>
+							<form name="apply" action="" method="POST" enctype="multipart/form-data">
 								<div class="flex-container justified-horizontally flex-wrap">									
 									<div class="form-field-wrapper width-medium">
 										<input type="text" value=<?php echo $user["first_name"] ?> placeholder="First Name*"/>
@@ -100,13 +96,13 @@
 										<input type="text" value=<?php echo $user["phone_number"] ?> placeholder="Phone Number"/>
 									</div>			
 									<div class="form-field-wrapper width-large">
-										<textarea placeholder="Custom Message*"></textarea>
+										<textarea name="custom_message" placeholder="Custom Message*"></textarea>
 									</div>
 									<div class="form-field-wrapper width-large">
-										<input type="file" />
+										<input type="file" name="cv" id="cv">
 									</div>
 								</div>	
-								<button class="button">
+								<button type = "submit" name = "submit" value="apply" class="button" >
 									Submit
 								</button>
 							</form>
@@ -116,4 +112,5 @@
 			</section>	
 		</main>
 	<?php
-		include 'footer.php';?>
+	include 'footer.php';
+	?>
