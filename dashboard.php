@@ -2,7 +2,11 @@
 
 	<?php
 		include 'header.php';
-		// include 'approve_reject.php'
+
+		if(!isset($_COOKIE["login"]) && !isset($_COOKIE["login_one_time"]) ){ 
+			header("location:login.php"); 
+		}
+
 	?>
 		<main class="site-main">
 			<section class="section-fullwidth section-jobs-dashboard">
