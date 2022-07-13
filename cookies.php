@@ -1,4 +1,5 @@
 <?php
+include "db_connection.php";
 
 function check_hash($log_hash, $db_hash){
     if(password_verify($log_hash, $db_hash) == true){
@@ -27,23 +28,26 @@ if(isset($_REQUEST['submit'])){
     $res123 = mysqli_query($cser,"select * from cookies where user_id = '".$result_id."'");
     $result123=mysqli_fetch_array($res123);
 
-    if($result_id == 0){
-        echo "Invalid email or password!";
-    }
-    if($result123 != NULL){
-        header("location:index.php"); 
-    }
-    else{
-        $sql_request = "INSERT INTO cookies(user_id, hash_id , end_date) VALUES ('".$result_id."', '". $hash_id."', '".$end_date."')";
+    if($_POST['remember'] == 1){
+        if($result123 == NULL){
+            $sql_request = "INSERT INTO cookies(user_id, hash_id , end_date) VALUES ('".$result_id."', '". $hash_id."', '".$end_date."')";
     
-        if ($cser->query($sql_request) === TRUE) {
-            setcookie("login",$hash_id,strtotime($end_date));// second on page time
-            header("location:index.php"); 
-        } 
+            if ($cser->query($sql_request) === TRUE) {
+                setcookie("login",$hash_id,strtotime($end_date));
+                header("location:index.php"); 
+            } 
+            else{
+                echo "ERROR: " . $sql_request . "<br>";
+            }
+        }
         else{
-            echo "ERROR: " . $sql_request . "<br>";
+            setcookie("login",$hash_id,strtotime($end_date));
+            header("location:index.php"); 
         }
     }
-}
+    else{
+        include "login_authentication.php";
+    }
 
+}
 ?>

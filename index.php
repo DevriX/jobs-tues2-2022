@@ -1,11 +1,4 @@
-
 <?php
-include 'header.php';
-if(!isset($_COOKIE["login"])){// $_COOKIE is a variable and login is a cookie name 
-	header("location:login.php"); 
-	echo "GOOD JOB!!! <3";
-}
-
 require_once 'header.php';
 require_once 'filter_category.php';
 	
@@ -46,12 +39,6 @@ if(!empty($sql)){
 	$result = mysqli_query($con, $sql); 
 }
 ?>
-
-<form action = "signout.php">
-	<button class="button">
-		Sign out
-	</button>
-</form>
 	
 <main class="site-main">
 	<section class="section-fullwidth section-jobs-preview">

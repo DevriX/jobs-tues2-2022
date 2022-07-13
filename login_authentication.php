@@ -1,10 +1,4 @@
 <?php
-function check_hash($log_hash, $db_hash){
-    if(password_verify($log_hash, $db_hash) == true){
-        return $db_hash;
-    }
-    return 0;
-}
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "login"){
     if (!empty($_POST['email']) and !empty($_POST["password"])) {
@@ -20,8 +14,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "login"){
         $result2 = mysqli_query($con, $sql);  
         $row = mysqli_fetch_array($result2, MYSQLI_ASSOC);  
         $count = mysqli_num_rows($result2);  
-            
+
         if($count == 1){
+            if($result123 == NULL){
+                $sql_req = "INSERT INTO cookies(user_id, hash_id ) VALUES ('".$result_id."', '". $hash_id."')";
+                if ($cser->query($sql_req) === TRUE) {
+                    setcookie("login_one_time",$hash_id,0);
+                }           
+            }
+            else{
+                setcookie("login_one_time",$hash_id,0);
+            }        
             header("Location: index.php");
         }  
         else{

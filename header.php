@@ -1,6 +1,8 @@
-<?php 
+<?php
+//$CHECK_LOGIN = 0; 
 	session_start();
-	?>
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +34,7 @@
 							<a href="profile.php">My Profile</a>					
 						</li>
 						<li class="menu-item">
-							<a href="login.php">Sign Out</a>					
+							<a href="signout.php">Sign Out</a>					
 						</li>
 					</ul>
 				</nav>
