@@ -113,6 +113,7 @@
 								</div>
 							</div>
 							<div class="job-secondary">
+								<?php if($user['is_admin'] == 1) { ?>
 								<div class="job-actions">
 									<a data-job-id="<?php echo $row['id'] ?>" data-status="<?php echo $row["status"] == 0 ?  1 : 0  ?>" class="button approve button-inline">
 									<?php
@@ -120,6 +121,7 @@
 									?> 
 									</a>		
 								</div>
+								<?php } ?>
 								<div class="job-edit">
 									<a href="submissions.php?id=<?php echo $row["id"]?>">View Submissions</a>
 									<a href="actions-job.php?id=<?php echo $row["id"]?>">Edit</a>
