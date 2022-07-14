@@ -104,9 +104,4 @@
 			</section>	
 		</main>
 	<?php
-<<<<<<< HEAD
 		require_once 'footer.php';?>
-=======
-	include 'footer.php';
-	?>
->>>>>>> f650280d1192a6d20599e20a6fb70d2f1380bcc8
