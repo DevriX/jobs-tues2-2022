@@ -180,19 +180,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 		}
 
 		$target_file = IMAGE_PATH.'/'.$pname;
-		$uploadOk = 1;
 		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 		
 		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 		&& $imageFileType != "gif" ) {
 			$inserts_error["company_image_err"] = "Wrong file format!";
 		  	echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-		  	$uploadOk = 0;
 		}
 		
-		if ($uploadOk == 0) {
-		  echo "Sorry, your file was not uploaded.";
-		} 
 		else{
 		 	if (move_uploaded_file($tname, $target_file) && empty($inserts_error)){
 				$insert_user["company_image"] = basename( $pname);
@@ -236,31 +231,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 								<div class="form-field-wrapper">
 									<input type="text" name = "first_name" placeholder="First Name*"/>
 									<?php if(!empty($inserts_error["first_name_err"]))
-										echo "Please enter first name!";
+										echo $inserts_error["first_name_err"];
 									?>
 								</div>
 								<div class="form-field-wrapper">
 									<input type="text"  name = "last_name" placeholder="Last Name*"/>
 									<?php if(!empty($inserts_error["last_name_err"]))
-										echo "Please enter last name!";
+										echo $inserts_error["last_name_err"];
 									?>
 								</div>
 								<div class="form-field-wrapper">
 									<input type="text" name = "email" placeholder="Email*"/>
 									<?php if(!empty($inserts_error["email_err"]))
-										echo "Please enter email!";
+										echo $inserts_error["email_err"];
 									?>
 								</div>
 								<div class="form-field-wrapper">
 									<input type="password" name = "password" placeholder="Password*"/>
 									<?php if(!empty($inserts_error["password_err"]))
-										echo "Please enter password!";
+										echo $inserts_error["password_err"];
 									?>
 								</div>
 								<div class="form-field-wrapper">
 									<input type="password" name = "repeat_password" placeholder="Repeat Password*"/>
 									<?php if(!empty($inserts_error["repeat_password_err"]))
-										echo "Please repeat your password!";
+										echo $inserts_error["repeat_password_err"];
 									?>
 								</div>
 								<div class="form-field-wrapper">
