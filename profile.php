@@ -13,33 +13,20 @@ if(!isset($_COOKIE["login"])){
 	header("location:login.php"); 
 }
 
-$con = OpenCon();
-$sql_cookie = mysqli_query($con,"SELECT user_id 
-						  FROM cookies 
-						  WHERE hash_id = '".$_COOKIE["login"]."'");
-$result_cookie = mysqli_fetch_array($sql_cookie);
-$user_id = intval($result_cookie["user_id"]);
-
-$sql = mysqli_query($con,"SELECT * 
-						  FROM users 
-						  WHERE id = $user_id");
-$result = mysqli_fetch_array($sql);
-
-
 
 $insert_user = array(
-	"first_name" 		   => $result["first_name"],
-	"last_name"  		   => $result["last_name"],
-	"email"     		   => $result["email"],
-	"password"  		   => $result["password"],
-	"repeat_password"      => $result["password"],
-	"phone_number"         => $result["phone_number"],
-	"company_name"         => $result["company_name"],
-	"company_location"     => $result["company_location"],
-	"company_site"     	   => $result["company_site"],
-	"company_description"  => $result["company_description"],
-	"company_image"        => $result["company_image"],
-	"is_admin"             => $result["is_admin"]
+	"first_name" 		   => $user["first_name"],
+	"last_name"  		   => $user["last_name"],
+	"email"     		   => $user["email"],
+	"password"  		   => $user["password"],
+	"repeat_password"      => $user["password"],
+	"phone_number"         => $user["phone_number"],
+	"company_name"         => $user["company_name"],
+	"company_location"     => $user["company_location"],
+	"company_site"     	   => $user["company_site"],
+	"company_description"  => $user["company_description"],
+	"company_image"        => $user["company_image"],
+	"is_admin"             => $user["is_admin"]
 
 );
 
@@ -67,7 +54,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "save"){
 	else{
 		//checks if email is already used`
 		$select = mysqli_query($con, "SELECT `email` FROM `users` WHERE `email` = '".$_POST['email']."'") or exit(mysqli_error($connectionID));
-		if($_POST["email"] != $result["email"]){
+		if($_POST["email"] != $user["email"]){
 			if(mysqli_num_rows($select)) {
 				$inserts_error["email_err"] = "Email is already being used.";
 				echo('This email is already being used');
@@ -172,8 +159,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "save"){
 	}
 
 	if(!empty($_FILES["company_image"]["name"])){
-		if(!empty($result["company_image"])){
-			unlink(IMAGE_PATH.'/'.$result["company_image"]);
+		if(!empty($user["company_image"])){
+			unlink(IMAGE_PATH.'/'.$user["company_image"]);
 		}
 		$pname = $_FILES["company_image"]["name"]; 
 		$tname=$_FILES["company_image"]["tmp_name"];
