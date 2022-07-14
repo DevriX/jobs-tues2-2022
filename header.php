@@ -61,12 +61,13 @@
 		$con = OpenCon();
 
 		if(isset($_COOKIE["login"])){
-		$sql = mysqli_query($con,"SELECT user_id 
+		$sql = mysqli_query($con,"SELECT user_id, users.*
 								FROM cookies 
+								JOIN users ON users.id = cookies.user_id
 								WHERE hash_id = '".$_COOKIE["login"]."'");
-		$result = mysqli_fetch_array($sql);
-		$user_id = intval($result["user_id"]);
-		$user = ShowUser($user_id);
+	
+		$user  = mysqli_fetch_array($sql);
+		$user_id = intval($user["user_id"]);
 		}
 		?>
 		</header>
