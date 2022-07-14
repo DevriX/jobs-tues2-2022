@@ -126,6 +126,7 @@
 								<div class="job-edit">
 									<a href="submissions.php?id=<?php echo $row["id"]?>">View Submissions</a>
 									<a href="actions-job.php?id=<?php echo $row["id"]?>">Edit</a>
+									<a data-jobid="<?php echo  $row['id'] ?>" class="delete-job">Delete</a>
 								</div>
 							</div>
 						</li>
