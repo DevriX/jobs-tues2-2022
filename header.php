@@ -1,6 +1,7 @@
-<?php 
+<?php
 	session_start();
-	?>
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,8 @@
 
 	<link rel="stylesheet" href="./css/master.css">
 	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="JS/ajax.js"></script>
 </head>
 <body>
 	<div class="site-wrapper">
@@ -31,9 +34,22 @@
 						<li class="menu-item">
 							<a href="profile.php">My Profile</a>					
 						</li>
+						<?php 
+						if(isset($_COOKIE["login"]) || isset($_COOKIE["login_one_time"]) ){
+						?> 
 						<li class="menu-item">
-							<a href="login.php">Sign Out</a>					
+							<a href="signout.php">Sign Out</a>					
 						</li>
+						<?php
+						}
+						if(!isset($_COOKIE["login"]) && !isset($_COOKIE["login_one_time"]) ){
+						?> 
+						<li class="menu-item">
+							<a href="login.php">Log In</a>					
+						</li>
+						<?php
+						}
+						?>
 					</ul>
 				</nav>
 				<button class="menu-toggle">

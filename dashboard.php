@@ -2,7 +2,11 @@
 
 	<?php
 		include 'header.php';
-		include 'approve_reject.php'
+
+		if(!isset($_COOKIE["login"]) && !isset($_COOKIE["login_one_time"]) ){ 
+			header("location:login.php"); 
+		}
+
 	?>
 		<main class="site-main">
 			<section class="section-fullwidth section-jobs-dashboard">
@@ -83,22 +87,14 @@
 							</div>
 							<div class="job-secondary">
 								<div class="job-actions">
-									<form action="approve_reject.php">
+									<a data-job-id="<?php echo $row['id'] ?>" data-status="<?php echo $row["status"] == 0 ?  1 : 0  ?>" class="button approve button-inline">
 									<?php
-										if($row["status"] == 0) {
-									?>
-									<a href="?id=<?php echo $row['id']; ?>&status=<?php echo 1?>" class="button button-inline">Approve</a>
-									<?php
-										} else {
-									?>
-									<a href="?id=<?php echo $row['id']; ?>&status=<?php echo 0?>" class="button button-inline">Reject</a>
-									  <?php
-										}
-									?>
-									</form>				
+									echo $row["status"] == 0 ?  "Approve" : "Reject" 
+									?> 
+									</a>		
 								</div>
 								<div class="job-edit">
-									<a href="submissions.php?id=<?php echo $row["id"]?>&title= <?php echo $row["title"]?>">View Submissions</a>
+									<a href="submissions.php?id=<?php echo $row["id"]?>">View Submissions</a>
 									<a href="actions-job.php?id=<?php echo $row["id"]?>">Edit</a>
 								</div>
 							</div>

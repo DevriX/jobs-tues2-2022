@@ -3,9 +3,16 @@
 		include 'header.php';
 		$id = $_GET["id"];
 		$job = ShowJob($id);
-		$user_id = $_GET["user_id"]; 
-		// $user_id = $_COOKIE["user_id"]; 
+		
+		$con = OpenCon();
+		$sql = mysqli_query($con,"SELECT user_id 
+								FROM cookies 
+								WHERE hash_id = '".$_COOKIE["login"]."'");
+		$result = mysqli_fetch_array($sql);
+		$user_id = intval($result["user_id"]);
 		$user = ShowUser($user_id);
+
+var_dump($user_id);
 
 		$insert_user = array(
 			"custom_message"  => '',
@@ -84,16 +91,16 @@
 							<form name="apply" action="" method="POST" enctype="multipart/form-data">
 								<div class="flex-container justified-horizontally flex-wrap">									
 									<div class="form-field-wrapper width-medium">
-										<input type="text" value=<?php echo $user["first_name"] ?> placeholder="First Name*"/>
+										<input type="text" placeholder="First Name*" value="<?php echo $user["first_name"] ?>" />
 									</div>
 									<div class="form-field-wrapper width-medium">
-										<input type="text" value=<?php echo $user["last_name"] ?> placeholder="Last Name*"/>
+										<input type="text" placeholder="Last Name*" value="<?php echo $user["last_name"] ?>" />
 									</div>
 									<div class="form-field-wrapper width-medium">
-										<input type="text" value=<?php echo $user["email"] ?> placeholder="Email*"/>
+										<input type="text" placeholder="Email*" value="<?php echo $user["email"] ?>" />
 									</div>
 									<div class="form-field-wrapper width-medium">
-										<input type="text" value=<?php echo $user["phone_number"] ?> placeholder="Phone Number"/>
+										<input type="text" placeholder="Phone Number" value="<?php echo $user["phone_number"] ?>" />
 									</div>			
 									<div class="form-field-wrapper width-large">
 										<textarea name="custom_message" placeholder="Custom Message*"></textarea>
