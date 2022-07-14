@@ -1,7 +1,6 @@
 <?php
 require_once "db_connection.php";
 
-
 $cser=OpenCon() or die("connection failed:".mysqli_error());
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "login" && !empty($_POST['email']) && !empty($_POST["password"])){
@@ -13,8 +12,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "login" && !empt
         echo "Wrong password";
         header("Location: login.php");
         echo '<div class="alert alert-danger" style=color:red>
-                Wrong email or password!
-            </div>';
+        Wrong email or password!
+        </div>';
         return;
         
     }

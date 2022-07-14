@@ -54,15 +54,15 @@
 							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 						?>
 						<li class="job-card">
-							<div class="job-primary">
-								<h2 class="job-title"><?php echo  $row['title'] ?></h2>
-							</div>
-							<div class="job-secondary centered-content">
-								<div class="job-actions">
-									<a href="?cat_id=<?php echo $row['id']; ?>" class="button button-inline">Delete</a>
-								</div>
-							</div>
-						</li>
+                            <div class="job-primary">
+                                <h2 class="job-title"><?php echo  $row['title'] ?></h2>
+                            </div>
+                            <div class="job-secondary centered-content">
+                                <div class="job-actions">
+                                    <a data-category-id="<?php echo  $row['id'] ?>" class="button delete button-inline">Delete</a>
+                                </div>
+                            </div>
+                        </li>
 						<?php 
 							} 
 						

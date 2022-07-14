@@ -1,11 +1,13 @@
 <?php
-    if($_SERVER["REQUEST_METHOD"] == "GET"){
-        
-        if(!empty($_GET['cat_id'])){
-            $id = $_GET['cat_id'];  
-            $sql = "DELETE FROM categories WHERE id=".$id;
-            $con->query($sql);
-            
-        }
+    require_once 'db_connection.php';
+    
+    $con = OpenCon();
+     
+    if(!empty($_POST['id'])){
+        $id = $_POST['id'];  
+        $sql = "DELETE FROM categories WHERE categories.id = $id";
+        $res = $con->query($sql);    
+        echo $res;
+        die();
     }
 ?>
