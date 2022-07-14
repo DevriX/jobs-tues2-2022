@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="./css/master.css">
 	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-	<script src="JS/ajax.js"></script>
+	<script src="JS/ajax.js?<?php echo time()?>" ></script>
 </head>
 <body>
 	<div class="site-wrapper">
@@ -57,7 +57,17 @@
 				</button>
 			</div>
 		<?php
-			include 'db_connection.php';
-			$con = OpenCon();
+		include 'db_connection.php';
+		$con = OpenCon();
+
+		if(isset($_COOKIE["login"])){
+		$sql = mysqli_query($con,"SELECT user_id, users.*
+								FROM cookies 
+								JOIN users ON users.id = cookies.user_id
+								WHERE hash_id = '".$_COOKIE["login"]."'");
+	
+		$user  = mysqli_fetch_array($sql);
+		$user_id = intval($user["user_id"]);
+		}
 		?>
 		</header>
