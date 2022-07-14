@@ -50,5 +50,4 @@ require 'config.php';
 
         return $jobs;
     }
-   
 ?>
