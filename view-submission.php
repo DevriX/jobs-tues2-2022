@@ -3,7 +3,7 @@
 
 		if(!empty($_GET['id'])){
 			$app_id = $_GET['id'];
-			$sql = mysqli_query($con,"SELECT * 
+			$sql = mysqli_query($con,"SELECT *
 									FROM applications 
 									LEFT JOIN jobs 
 									ON applications.job_id=jobs.id 
@@ -20,7 +20,7 @@
 					<div class="flex-container centered-vertically centered-horizontally">
 						<div class="form-box box-shadow">
 							<div class="section-heading">
-								<h2 class="heading-title">Job Name - Applicant Name</h2>
+								<h2 class="heading-title"><?php echo $row['title'];?> - <?php echo $row['first_name']. " " .$row['last_name'];?></h2>
 							</div>
 							<form action="uploads/cv/<?php echo($cv) ?>">
 								<div class="flex-container justified-horizontally flex-wrap">
