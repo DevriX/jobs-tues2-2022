@@ -3,14 +3,6 @@
 		include 'header.php';
 		$id = $_GET["id"];
 		$job = ShowJob($id);
-		
-		$con = OpenCon();
-		$sql = mysqli_query($con,"SELECT user_id 
-								FROM cookies 
-								WHERE hash_id = '".$_COOKIE["login"]."'");
-		$result = mysqli_fetch_array($sql);
-		$user_id = intval($result["user_id"]);
-		$user = ShowUser($user_id);
 
 		$insert_user = array(
 			"custom_message"  => '',
