@@ -7,21 +7,43 @@ require_once 'pagination.php';
 <main class="site-main">
 	<section class="section-fullwidth section-jobs-preview">
 		<div class="row">	
+		<form name="search" action="" method="GET">
+			<?php
+				if(isset($_GET['filter'])){
+				
+					foreach($_GET['filter'] as $filter){
+			?>
+						<input type="hidden" name='filter[]' value='<?php echo $filter;?>'>
+					
+			<?php
+					}
+				}
+			?> 	
 			<ul class="tags-list">
 				<?php
+					$url = $_SERVER['REQUEST_URI'];
+					if(!strpos($url, "?")){
+						$url = $url."?";
+					}
+
 					$category = ShowCategory();
 					if(!empty($category)){
-						foreach($category as $row){		
+						foreach($category as $row){	
+							$style = "";
+							if(isset($_GET['filter'])){
+								if(in_array($row['id'], $_GET['filter'])){
+									$style = 'style="background-color: #a1a9b5; pointer-events: none; cursor: default;"';
+								}
+							}	
 				?>	
 				<li class="list-item">
-					<a href="#"  class="list-item-link"><?php echo $row['title'];?></a>
+					<a <?php echo $style; ?> href="<?php echo urldecode($url."&filter[]=".$row['id']);?>"  class="list-item-link"><?php echo $row['title'];?></a>
 				</li>
 				<?php		
 						}
 					}
 				?>
 			</ul>
-			<form name="search" action="" method="GET">
 			<div class="flex-container centered-vertically">
 				<div class="search-form-wrapper">
 					<div class="search-form-field"> 
@@ -47,7 +69,9 @@ require_once 'pagination.php';
 			
 			<button type="submit" class="button" name="search-button">
 				Search
-			</button><br></br>
+			</button>
+			<a style="margin-left:10px" href="<?php echo $_SERVER["PHP_SELF"]?>">Clear all</a>
+			<br></br>
 			</form>
 			<ul class="jobs-listing">
 			<?php
@@ -59,18 +83,10 @@ require_once 'pagination.php';
 				}
 				
 				$url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-				if(!empty($_GET["search"])){
-					$sql = search($order_list);
-				}	
-				else {
-					$sql = "SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) 
-							AS 'Date', users.phone_number, users.company_name, 
-							users.company_location, users.company_image
-							FROM jobs 
-							JOIN users 
-							ON users.id = jobs.user_id 
-							ORDER BY $order_list";
-				}
+				
+
+				$sql = search_filter($order_list);
+				
 				
 				if(!empty($sql)){
 					$num_rows = mysqli_num_rows ($con->query($sql));
