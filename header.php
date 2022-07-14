@@ -57,7 +57,17 @@
 				</button>
 			</div>
 		<?php
-			include 'db_connection.php';
-			$con = OpenCon();
+		include 'db_connection.php';
+		$con = OpenCon();
+
+		if(isset($_COOKIE["login"])){
+		$sql = mysqli_query($con,"SELECT user_id, users.*
+								FROM cookies 
+								JOIN users ON users.id = cookies.user_id
+								WHERE hash_id = '".$_COOKIE["login"]."'");
+	
+		$user  = mysqli_fetch_array($sql);
+		$user_id = intval($user["user_id"]);
+		}
 		?>
 		</header>
