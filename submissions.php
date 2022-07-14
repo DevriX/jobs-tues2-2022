@@ -2,11 +2,14 @@
 	<?php
 		require_once 'header.php';
 		require_once 'pagination.php';
+		require_once 'submission_delete.php'
 	?>
 		<?php
-
-			$id = $_GET["id"]; 
-			$row = ShowJob($id);
+			if(isset($_GET["id"])){
+				$id = $_GET["id"]; 
+				$row = ShowJob($id);
+			}
+			
 		?>
 		<main class="site-main">
 			<section class="section-fullwidth">
@@ -21,7 +24,8 @@
 					</ul>
 
 					<?php
-							$sql = "SELECT *, users.first_name, users.last_name, applications.user_id, applications.id AS APP_ID
+							$sql = "SELECT *, users.first_name, users.last_name, applications.user_id, applications.id 
+									-- AS APP_ID
 									FROM applications 
 									JOIN users 
 									ON users.id = applications.user_id 
@@ -39,7 +43,10 @@
 						<h2 class="heading-title"><?php echo $row["title"]?> - Submissions - <?php echo $num_rows?> Applicants</h2>
 					</div>
 					<?php
-						while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {	
+						if(!empty($result)){
+						while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+							//var_dump($row);
+
 					?>
 					<ul class="jobs-listing">
 						<li class="job-card">
@@ -48,14 +55,16 @@
 							</div>
 							<div class="job-secondary centered-content">
 								<div class="job-actions">
-									<a href="view-submission.php?id=<?php echo $row['APP_ID'];?>" class="button button-inline">View</a>
-									<a data-category-id="<?php echo $row['APP_ID'] ?>" class="button delete button-inline">Delete</a>
+									<a href="view-submission.php?id=<?php echo $row['id'];?>" class="button button-inline">View</a>
+									<a data-application-id="<?php echo  $row['id'] ?>" class="button delete-app button-inline">Delete</a>
+					
 								</div>
 							</div>
 						</li>
 
 						<?php 
 							}
+						}
 						?>
 						
 					</ul>					
