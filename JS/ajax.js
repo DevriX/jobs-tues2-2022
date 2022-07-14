@@ -46,3 +46,23 @@ $(document).ready(function(){
         })
     })
 })
+
+$(document).ready(function(){
+    $('.delete-app').on("click",function(e) {
+        e.preventDefault()
+        $e = $(e.target)
+        let id = $e.data("application-id")
+        $.ajax({
+            url: "submission_delete.php",
+            type: "POST",
+            data: {
+                id: id,
+            },
+            success: function(response) {
+                if(response) {
+                    $($e).parents('li.job-card').hide();
+                }
+            }
+        })
+    })
+})

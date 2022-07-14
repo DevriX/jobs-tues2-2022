@@ -1,8 +1,8 @@
 
 	<?php
-		include 'header.php'; 
-		include 'category_delete.php';
-
+		require_once 'header.php'; 
+		require_once 'category_delete.php';
+		require_once 'pagination.php';
 	?>
 		<main class="site-main">
 			<section class="section-fullwidth section-jobs-dashboard">
@@ -29,7 +29,7 @@
 												Add New
 											</button>		
 									</div>	
-									<?php include 'category_add.php';?>			
+									<?php require_once 'category_add.php';?>			
 								</form>
 								
 							</div>
@@ -38,17 +38,13 @@
 					 
 					<ul class="jobs-listing">
 						<?php
-							$limit = 5;
-							if (!isset ($_GET['page']) ) {  
-								$page = 1;  
-							} else {  
-								$page = $_GET['page'];  
-							}
-							
-							$page_first_result = ($page-1) * $limit;
-							$sql = "SELECT id, title FROM categories ORDER BY title ASC LIMIT $page_first_result, $limit";
+						
+							$sql = "SELECT id, title 
+									FROM categories 
+									ORDER BY title ASC 
+									LIMIT ".$page_first_result.','. LIMIT;
 							$num_rows = mysqli_num_rows ($con->query("SELECT * FROM categories"));
-							$page_total = ceil($num_rows / $limit);
+							$page_total = ceil($num_rows / LIMIT);
 							$result = mysqli_query($con, $sql); 
 							
 							while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -69,22 +65,12 @@
 						?>					
 					<div class="jobs-pagination-wrapper">
 						<div class="nav-links"> 
-						<?php 
-							for ($i = 1; $i <= $page_total; $i++) {
-								if($i == $page) {
-									printf("<a class='page-numbers current' %shref='category-dashboard.php?page=%u'>%u</a>", 
-									$i==$page ? : "", $i, $i );
-								} else {
-									printf("<a class='page-numbers' %shref='category-dashboard.php?page=%u'>%u</a>", 
-									$i==$page ? : "", $i, $i );
-								}
-							} 
-						?>
+							<?php pagination($page, $page_total); ?>
 						</div>
 					</div>
 				</div>
 			</section>
 		</main>
 	<?php
-		include 'footer.php';?>
+		require_once 'footer.php';?>
 
