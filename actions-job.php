@@ -46,32 +46,26 @@
 				$insert_user["salary"] = ($_POST["salary"]);
 			}
 
-			if(!empty($_POST["categories"])){
-				foreach($_POST["categories"] as $selected) {
-					array_push($categories, $selected);
-				}
-			}
-
 			if(empty($inserts_error)){
 				$sql_request = "INSERT INTO jobs(user_id, title, status, description, responsibilities, salary, date_posted) VALUES ('".$user['id']."', '".$insert_user['title']."', 0, '".$insert_user['description']."', '".$insert_user['responsibilities']."', '".$insert_user['salary']."', '".$date."')";
 
 				if ($con->query($sql_request) === TRUE) {
 					echo "Job created.";
+					$last_id = mysqli_insert_id($con);
+
+					if(!empty($_POST["categories"])){
+						foreach($_POST["categories"] as $category){
+							$sql_request1 = "INSERT INTO jobs_categories(job_id, category_id) VALUES($last_id, $category)";
+							if ($con->query($sql_request1) === TRUE) {
+								echo "Category added.";
+							} else {
+								echo "ERROR: " . $sql_request1 . "<br>";
+							}
+						}
+					}
 				} else {
 					echo "ERROR: " . $sql_request . "<br>";
 				}
-
-				$last_id = mysqli_insert_id($con);
-
-				foreach($categories as $category){
-					$sql_request1 = "INSERT INTO jobs_categories(job_id, category_id) VALUES($last_id, $category)";
-					if ($con->query($sql_request1) === TRUE) {
-						echo "Job created.";
-					} else {
-						echo "ERROR: " . $sql_request1 . "<br>";
-					}
-				}
-
 			}
 		}
 	?>
@@ -100,15 +94,15 @@
 										<input type="text" name="salary" value="<?php if(!empty($job["salary"])) { echo $job["salary"]; }?>" placeholder="Salary"/>
 									</div>
 									<div class="form-field-wrapper width-large">
-										<textarea name="description" placeholder="Description*" value=""><?php if(!empty($job["description"])) { echo $job["description"]; }?></textarea>
+										<textarea name="description" placeholder="Description*"><?php if(!empty($job["description"])) { echo $job["description"]; }?></textarea>
 									</div>	
 									<div class="form-field-wrapper width-large">
-										<textarea name="responsibilities" placeholder="Responsibilities" value=""><?php if(!empty($job["responsibilities"])) { echo $job["responsibilities"]; }?></textarea>
+										<textarea name="responsibilities" placeholder="Responsibilities"><?php if(!empty($job["responsibilities"])) { echo $job["responsibilities"]; }?></textarea>
 									</div>	
 									<div class="form-field-wrapper width-large">
 										<select multiple="multiple" name="categories[]">
 										<option style="text-align:center" disabled>
-											Seelect one or more categories:
+											Select one or more categories:
 										</option>
 										<?php 
 											$request = $con->query("SELECT * FROM categories");
