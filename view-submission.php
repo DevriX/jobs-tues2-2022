@@ -1,12 +1,19 @@
 	<?php
 		require_once 'header.php';	
-		require_once 'view_applicant.php';
 
-		if(!empty($_GET['user_id'])){
-			$user_id = $_GET['user_id'];
-			$row = ShowUser();
+		if(!empty($_GET['id'])){
+			$app_id = $_GET['id'];
+			$sql = mysqli_query($con,"SELECT * 
+									FROM applications 
+									LEFT JOIN jobs 
+									ON applications.job_id=jobs.id 
+									LEFT JOIN users 
+									ON applications.user_id=users.id 
+									WHERE applications.id=" . $app_id);
+			$row = mysqli_fetch_array($sql, MYSQLI_BOTH);
+			$cv = $row['cv'];
 		}
-	?>
+?>
 		<main class="site-main">
 			<section class="section-fullwidth">
 				<div class="row">	
@@ -15,16 +22,16 @@
 							<div class="section-heading">
 								<h2 class="heading-title">Job Name - Applicant Name</h2>
 							</div>
-							<form name="form" action="" method="GET">
+							<form action="uploads/cv/<?php echo($cv) ?>">
 								<div class="flex-container justified-horizontally flex-wrap">
 									<div class="form-field-wrapper width-medium">
-										<input type="text" placeholder="Email" values="<?php $row['email']?>" readonly />
+										<input type="text" placeholder="Email" value="<?php if(!empty($row['email'])){ echo $row['email']; }?>" readonly />
 									</div>
 									<div class="form-field-wrapper width-medium">
-										<input type="text" placeholder="Phone Number" values="<?php $row['phone_number']?>" readonly />
+										<input type="text" placeholder="Phone Number" value="<?php if(!empty($row['phone_number'])){ echo $row['phone_number']; }?>" readonly />
 									</div>			
 									<div class="form-field-wrapper width-large">
-										<textarea placeholder="Custom Message" values="<?php $row['custom_message']?>" readonly ></textarea>
+										<textarea placeholder="Custom Message" readonly ><?php if(!empty($row['custom_message'])){ echo $row['custom_message']; }?></textarea>
 									</div>
 								</div>	
 								<button type="submit" class="button">
