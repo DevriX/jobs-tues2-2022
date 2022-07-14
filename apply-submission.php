@@ -42,17 +42,12 @@
 					$inserts_error["company_image_err"] = "Wrong file format!";
 				  echo "Sorry, only DOCX & PDF files are allowed.";
 				  $uploadOk = 0;
-				}
-				
-				if ($uploadOk == 0) {
-				  echo "Sorry, your file was not uploaded.";
-			
 				} else {
 				  if (move_uploaded_file($tname, $target_file) && empty($inserts_error)) {
 					$insert_user["cv"] = basename( $pname);
 					echo "The file ". htmlspecialchars( basename( $pname)). " has been uploaded.";
 				  } else {
-						$inserts_error["cv_err"] = "Wrong file format!";
+						$inserts_error["cv_err"] = "Sorry, there was an error uploading your file.";
 						echo "Sorry, there was an error uploading your file.";
 				  }
 				}
