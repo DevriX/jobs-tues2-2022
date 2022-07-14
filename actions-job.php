@@ -45,7 +45,9 @@
 			if(!empty($_POST["salary"])){
 				$insert_user["salary"] = ($_POST["salary"]);
 			}
-
+			if(empty($_POST["categories"])){
+				$inserts_error["categories_err"] = "Categories field required.";
+			}
 			if(empty($inserts_error)){
 				$sql_request = "INSERT INTO jobs(user_id, title, status, description, responsibilities, salary, date_posted) VALUES ('".$user['id']."', '".$insert_user['title']."', 0, '".$insert_user['description']."', '".$insert_user['responsibilities']."', '".$insert_user['salary']."', '".$date."')";
 
@@ -93,8 +95,9 @@
 				$insert_user["salary"] = ($_POST["salary"]);
 			}
 
+
+
 			if(empty($inserts_error)){
-				// $sql_request = "INSERT INTO jobs(user_id, title, status, description, responsibilities, salary, date_posted) VALUES ('".$user['id']."', '".$insert_user['title']."', 0, '".$insert_user['description']."', '".$insert_user['responsibilities']."', '".$insert_user['salary']."', '".$date."')";
 				$sql_request = "UPDATE jobs SET user_id = '".$user['id']."', title =  '".$insert_user['title']."', status = 0, description =  '".$insert_user['description']."',  responsibilities =  '".$insert_user['responsibilities']."', salary = '".$insert_user['salary']."', date_posted = '".$date."'";
 				if ($con->query($sql_request) === TRUE) {
 					echo "Job Updated.";
@@ -137,21 +140,39 @@
 								<div class="flex-container flex-wrap">
 									<div class="form-field-wrapper width-large">
 										<input type="text" name="title" value="<?php if(!empty($job["title"])) { echo $job["title"]; }?>" placeholder="Job title*"/>
+										<?php if(!empty($inserts_error["title_err"]))
+											echo $inserts_error["title_err"];
+										?>
 									</div>
 									<div class="form-field-wrapper width-large">
 										<input type="text" name="company_location" value="<?php if(!empty($job["company_location"])) { echo $job["company_location"]; }?>" placeholder="Location"/>
+										<?php if(!empty($inserts_error["location_err"]))
+											echo $inserts_error["location_err"];
+										?>
 									</div>
 									<div class="form-field-wrapper width-large">
 										<input type="text" name="salary" value="<?php if(!empty($job["salary"])) { echo $job["salary"]; }?>" placeholder="Salary"/>
+										<?php if(!empty($inserts_error["salary_err"]))
+											echo $inserts_error["salary_err"];
+										?>
 									</div>
 									<div class="form-field-wrapper width-large">
 										<textarea name="description" placeholder="Description*"><?php if(!empty($job["description"])) { echo $job["description"]; }?></textarea>
+										<?php if(!empty($inserts_error["description_err"]))
+											echo $inserts_error["description_err"];
+										?>
 									</div>	
 									<div class="form-field-wrapper width-large">
 										<textarea name="responsibilities" placeholder="Responsibilities"><?php if(!empty($job["responsibilities"])) { echo $job["responsibilities"]; }?></textarea>
+										<?php if(!empty($inserts_error["responsibilities_err"]))
+											echo $inserts_error["responsibilities_err"];
+										?>
 									</div>	
 									<div class="form-field-wrapper width-large">
 										<select multiple="multiple" name="categories[]">
+										<?php if(!empty($inserts_error["categories_err"]))
+											echo $inserts_error["categories_err"];
+										?>
 										<option style="text-align:center" disabled>
 											Select one or more categories:
 										</option>
