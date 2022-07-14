@@ -49,6 +49,7 @@
 							<div class="job-secondary centered-content">
 								<div class="job-actions">
 									<a href="view-submission.php?id=<?php echo $row['APP_ID'];?>" class="button button-inline">View</a>
+									<a data-category-id="<?php echo $row['APP_ID'] ?>" class="button delete button-inline">Delete</a>
 								</div>
 							</div>
 						</li>
