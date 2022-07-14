@@ -1,7 +1,33 @@
 <?php
 	session_start();
 	
-?>
+	function url_get(){
+		if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+		$url = "https://";   
+		else  
+		$url = "http://";   
+		// Append the host(domain name, ip) to the URL.   
+		$url.= $_SERVER['HTTP_HOST'];   
+		
+		// Append the requested resource location to the URL   
+		$url.= $_SERVER['REQUEST_URI']; 
+		$current_url = 3;
+		if(strpos($url, "index.php")){
+			$current_url = 1;
+		} 
+		if(strpos($url, "login.php")){
+			$current_url = 2;
+		}
+		if(strpos($url, "dashboard.php")){
+			$current_url = 3;
+		} 
+		if(strpos($url, "profile.php")){
+			$current_url = 4;
+		}
+		return $current_url; 
+	}
+?> 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,16 +51,49 @@
 				</div>
 				<nav class="site-header-navigation">
 					<ul class="menu">
+						<?php 
+						if(url_get() == 1){
+						?>
+						<li class="menu-item current-menu-item">
+							<a href="index.php">Home</a>					
+						</li>
+						<?php
+						}
+						else{
+						?>
 						<li class="menu-item">
 							<a href="index.php">Home</a>					
 						</li>
+						<?php
+						}
+						if(url_get() == 3){
+						?>
 						<li class="menu-item current-menu-item">
-							<a href="dashboard.php">Dashboard</a>
+							<a href="dashboard.php">Dashboard</a>					
 						</li>
+						<?php
+						}
+						else{
+						?>
 						<li class="menu-item">
-							<a href="profile.php">My Profile</a>					
+							<a href="dashboard.php">Dashboard</a>					
 						</li>
-						<?php 
+						<?php
+						}
+						if(url_get() == 4){
+						?>
+						<li class="menu-item current-menu-item">
+							<a href="profile.php">My profile</a>					
+						</li>
+						<?php
+						}
+						else{
+						?>
+						<li class="menu-item">
+							<a href="profile.php">My profile</a>					
+						</li>
+						<?php
+						}
 						if(isset($_COOKIE["login"]) ){
 						?> 
 						<li class="menu-item">
@@ -43,11 +102,20 @@
 						<?php
 						}
 						if(!isset($_COOKIE["login"])){
+							if(url_get() == 2){
 						?> 
-						<li class="menu-item">
+						<li class="menu-item current-menu-item">
 							<a href="login.php">Log In</a>					
 						</li>
 						<?php
+							}
+							else{
+						?>
+							<li class="menu-item">
+								<a href="login.php">Log In</a>					
+							</li>
+						<?php
+							}
 						}
 						?>
 					</ul>
