@@ -1,6 +1,6 @@
 
 	<?php
-		include 'header.php';
+		require_once 'header.php';
 	?>
 		<main class="site-main">
 			<section class="section-fullwidth">
@@ -42,4 +42,4 @@
 			</section>	
 		</main>
 	<?php
-		include 'footer.php';?>
+		require_once 'footer.php';?>

@@ -39,7 +39,10 @@
 					<ul class="jobs-listing">
 						<?php
 						
-							$sql = "SELECT id, title FROM categories ORDER BY title ASC LIMIT ".$page_first_result.','. LIMIT;
+							$sql = "SELECT id, title 
+									FROM categories 
+									ORDER BY title ASC 
+									LIMIT ".$page_first_result.','. LIMIT;
 							$num_rows = mysqli_num_rows ($con->query("SELECT * FROM categories"));
 							$page_total = ceil($num_rows / LIMIT);
 							$result = mysqli_query($con, $sql); 

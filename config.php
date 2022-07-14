@@ -5,5 +5,6 @@
     define( 'DB_NAME', '' );
     define( 'DB_HOST', '' );
     define( 'IMAGE_PATH', 'uploads/company_images/');
+    define( 'LIMIT', 5 );
 
 ?>
