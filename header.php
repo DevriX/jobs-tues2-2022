@@ -12,16 +12,16 @@
 		// Append the requested resource location to the URL   
 		$url.= $_SERVER['REQUEST_URI']; 
 
-		if(str_contains($url, "index.php")){
+		if(strpos($url, "index.php")){
 			$current_url = 1;
 		} 
-		if(str_contains($url, "login.php")){
+		if(strpos($url, "login.php")){
 			$current_url = 2;
 		}
-		if(str_contains($url, "dashboard.php")){
+		if(strpos($url, "dashboard.php")){
 			$current_url = 3;
 		} 
-		if(str_contains($url, "profile.php")){
+		if(strpos($url, "profile.php")){
 			$current_url = 4;
 		}
 		return $current_url; 
