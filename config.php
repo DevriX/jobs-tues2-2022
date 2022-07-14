@@ -1,11 +1,9 @@
 <?php
-
-    define( 'DB_USER', '' );
+    define( 'DB_USER', 'root' );
     define( 'DB_PASS', '' );
-    define( 'DB_NAME', '' );
-    define( 'DB_HOST', '' );
+    define( 'DB_NAME', 'JOB_BOARD' );
+    define( 'DB_HOST', 'localhost' );
     define( 'IMAGE_PATH', 'uploads/company_images/');
     define( 'CV_PATH', 'uploads/CV/');
     define( 'LIMIT', 5 );
-
 ?>
