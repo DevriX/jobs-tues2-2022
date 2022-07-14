@@ -3,7 +3,7 @@
 	<?php
 		include 'header.php';
 
-		if(!isset($_COOKIE["login"]) && !isset($_COOKIE["login_one_time"]) ){ 
+		if(!isset($_COOKIE["login"])){ 
 			header("location:login.php"); 
 		}
 
