@@ -12,8 +12,6 @@
 		$user_id = intval($result["user_id"]);
 		$user = ShowUser($user_id);
 
-var_dump($user_id);
-
 		$insert_user = array(
 			"custom_message"  => '',
 			"cv"      => '',
