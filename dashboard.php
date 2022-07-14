@@ -114,6 +114,7 @@
 							</div>
 							<div class="job-secondary">
 								<?php if($user['is_admin'] == 1) { ?>
+									
 								<div class="job-actions">
 									<a data-job-id="<?php echo $row['id'] ?>" data-status="<?php echo $row["status"] == 0 ?  1 : 0  ?>" class="button approve button-inline">
 									<?php
