@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	$current_url = 1;
+	
 	function url_get(){
 		if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
 		$url = "https://";   
@@ -11,7 +11,7 @@
 		
 		// Append the requested resource location to the URL   
 		$url.= $_SERVER['REQUEST_URI']; 
-
+		$current_url = 3;
 		if(strpos($url, "index.php")){
 			$current_url = 1;
 		} 
