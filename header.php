@@ -35,14 +35,14 @@
 							<a href="profile.php">My Profile</a>					
 						</li>
 						<?php 
-						if(isset($_COOKIE["login"]) || isset($_COOKIE["login_one_time"]) ){
+						if(isset($_COOKIE["login"]) ){
 						?> 
 						<li class="menu-item">
 							<a href="signout.php">Sign Out</a>					
 						</li>
 						<?php
 						}
-						if(!isset($_COOKIE["login"]) && !isset($_COOKIE["login_one_time"]) ){
+						if(!isset($_COOKIE["login"])){
 						?> 
 						<li class="menu-item">
 							<a href="login.php">Log In</a>					
