@@ -83,7 +83,6 @@ require_once 'pagination.php';
 				}
 				
 				$url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-				
 
 				$sql = search_filter($order_list);
 				
