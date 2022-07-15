@@ -1,31 +1,29 @@
-<?php
-	session_start();
+<?php	
+function url_get(){
+	if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+	$url = "https://";   
+	else  
+	$url = "http://";   
+	// Append the host(domain name, ip) to the URL.   
+	$url.= $_SERVER['HTTP_HOST'];   
 	
-	function url_get(){
-		if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
-		$url = "https://";   
-		else  
-		$url = "http://";   
-		// Append the host(domain name, ip) to the URL.   
-		$url.= $_SERVER['HTTP_HOST'];   
-		
-		// Append the requested resource location to the URL   
-		$url.= $_SERVER['REQUEST_URI']; 
-		$current_url = 3;
-		if(strpos($url, "index.php")){
-			$current_url = 1;
-		} 
-		if(strpos($url, "login.php")){
-			$current_url = 2;
-		}
-		if(strpos($url, "dashboard.php")){
-			$current_url = 3;
-		} 
-		if(strpos($url, "profile.php")){
-			$current_url = 4;
-		}
-		return $current_url; 
+	// Append the requested resource location to the URL   
+	$url.= $_SERVER['REQUEST_URI']; 
+	$current_url = 3;
+	if(strpos($url, "index.php")){
+		$current_url = 1;
+	} 
+	if(strpos($url, "login.php")){
+		$current_url = 2;
 	}
+	if(strpos($url, "dashboard.php")){
+		$current_url = 3;
+	} 
+	if(strpos($url, "profile.php")){
+		$current_url = 4;
+	}
+	return $current_url; 
+}
 ?> 
 
 <!DOCTYPE html>

@@ -23,8 +23,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "login" && !empt
 
     if(isset($_POST["remember"])){
         $end_date = date('Y-m-d', strtotime("today". ' + 1 month')); 
-        var_dump($end_date)  ;
-        //die();
     }
     else{
         $end_date = date(0);
