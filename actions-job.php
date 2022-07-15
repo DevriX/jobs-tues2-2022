@@ -2,6 +2,10 @@
 <?php
 require_once 'header.php';
 
+if(!isset($_COOKIE["login"])){ 
+	header("location:login.php"); 
+}
+
 if(isset($_GET['id'])) {
 	$id = $_GET['id'];
 	$job = ShowJob($id);
@@ -10,13 +14,13 @@ if(isset($_GET['id'])) {
 $date = date('Y-m-d');
 
 $insert_user = array(
-	"user_id"  => '',
-	"title"  => '',
-	"status"  => '',
-	"description"      => '',
+	"user_id"  			=> '',
+	"title"  			=> '',
+	"status"  			=> '',
+	"description"      	=> '',
 	"responsibilities"  => '',
-	"salary"  => '',
-	"date_posted"  => '',
+	"salary"  			=> '',
+	"date_posted"  		=> '',
 );
 
 $categories = array();

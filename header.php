@@ -22,6 +22,9 @@ function url_get(){
 	if(strpos($url, "profile.php")){
 		$current_url = 4;
 	}
+	if(strpos($url, "actions-job.php")){
+		$current_url = 5;
+	}
 	return $current_url; 
 }
 ?> 
@@ -78,6 +81,20 @@ function url_get(){
 						</li>
 						<?php
 						}
+						if(url_get() == 5){
+							?>
+							<li class="menu-item current-menu-item">
+								<a href="actions-job.php">Create Job</a>					
+							</li>
+							<?php
+							}
+						else{
+							?>
+							<li class="menu-item">
+								<a href="actions-job.php">Create Job</a>					
+							</li>
+							<?php
+							}
 						if(url_get() == 4){
 						?>
 						<li class="menu-item current-menu-item">
