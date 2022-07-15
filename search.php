@@ -25,7 +25,7 @@ function search_filter($drop_down){
       ORDER BY ".$drop_down;  
    } 
    else{
-   $raw_results = "SELECT jobs.id, jobs.title, DATEDIFF( CURDATE(), jobs.date_posted) 
+   $raw_results = "SELECT jobs.id, jobs.title, jobs.status, DATEDIFF( CURDATE(), jobs.date_posted) 
                   AS 'Date', users.phone_number, users.company_name, 
                   users.company_location, users.company_image
                   FROM jobs 
@@ -33,6 +33,7 @@ function search_filter($drop_down){
                   JOIN users 
                   ON users.id = jobs.user_id
                   WHERE 1 = 1 ".$filter_request['where']." 
+                  AND jobs.status = 1
                   ORDER BY $drop_down";
    }     
    return $raw_results ;
