@@ -54,7 +54,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 		$select = mysqli_query($con, "SELECT `email` FROM `users` WHERE `email` = '".$_POST['email']."'") or exit(mysqli_error($connectionID));
 		if(mysqli_num_rows($select)) {
 			$inserts_error["email_err"] = "Email is already being used.";
-			echo('This email is already being used');
 		}
 
 		//SAnitized email and check if ots valid
@@ -63,14 +62,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 			$insert_user["email"] = ($_POST["email"]);
 		}
 		else{
-			echo "Sorry! Invalid Email Format! <br>";
+			$inserts_error["email_err"] = "Sorry! Invalid Email Format! ";
 		}	
-
 
 		//check if email is devrix email.
 		if (stringEndsWith($insert_user["email"], '@devrix.com')) {
 			$insert_user["is_admin"] = 1;
 			echo "This is devrix email!\n";
+		}
+		else{
+			$insert_user["is_admin"] = 0;;
 		}
 	}
 
@@ -81,13 +82,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 		
 		// Validate password strength
 		$uppercase = preg_match('@[A-Z]@', $_POST["password"]);
-		$lowercase = preg_match('@[a-z]@', $_POST["password"]);
+		$lowercase = preg_match('@[a-z]@', $_POST["password"]);+
 		$number    = preg_match('@[0-9]@', $_POST["password"]);
 		$specialChars = preg_match('@[^\w]@', $_POST["password"]);
 		
 		if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($_POST["password"]) < 8) {
-			$inserts_error["password_err"] = "Not valid password.";
-			echo 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
+			$inserts_error["password_err"] = "Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.";
 		}
 		else{
 			$insert_user["password"] = password_hash( $_POST["password"], PASSWORD_DEFAULT);
@@ -98,7 +98,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 		$inserts_error["repeat_password_err"] = "Repeat your password.";
 	}
 	else{
-
 		if (strcmp($_POST["password"], $_POST["repeat_password"]) !== 0) {
 			echo $inserts_error["repeat_password_err"] = "Passwords don't match";
 		}
@@ -114,7 +113,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 			}
 		}
 		else{
-			echo "Invalid phone number <br>";
+			$inserts_error["phone_number_err"] = "Invalid phone number";
 		}
 	}
 
@@ -153,11 +152,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 
 		if (isDomainAvailible($_POST["company_site"])){
 			$insert_user["company_site"] = $_POST["company_site"];
-			echo "Up and running!";
 		}
 		else{
 			$inserts_error["company_site_err"] = "Website not found.";
-			echo "Woops, nothing found there.";
 		}
 	}
 
@@ -184,18 +181,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 		
 		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 		&& $imageFileType != "gif" ) {
-			$inserts_error["company_image_err"] = "Wrong file format!";
-		  	echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+			$inserts_error["company_image_err"] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
 		}
 		
 		else{
 		 	if (move_uploaded_file($tname, $target_file) && empty($inserts_error)){
 				$insert_user["company_image"] = basename( $pname);
-				echo "The file ". htmlspecialchars( basename( $pname)). " has been uploaded.";
+				echo "The file ". htmlspecialchars( basename( $pname)). " has been uploaded. </br>";
 		  	} 
 		  	else{
-				$inserts_error["company_image_err"] = "Wrong file format!";
-				echo "Sorry, there was an error uploading your file.";
+				$inserts_error["company_image_err"] = "Sorry, there was an error uploading your file.";
 		  	}
 		}
 	}
@@ -260,6 +255,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 								</div>
 								<div class="form-field-wrapper">
 									<input type="text" name ="phone_number" placeholder="Phone Number"/>
+									<?php if(!empty($inserts_error["phone_number_err"]))
+										echo $inserts_error["phone_number_err"];
+									?>
 								</div>
 							</div>
 							<div class="secondary-container">
@@ -269,6 +267,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 								</div>
 								<div class="form-field-wrapper">
 									<input type="text" name = "company_site" placeholder="Company Site"/>
+									<?php if(!empty($inserts_error["company_site_err"]))
+										echo $inserts_error["company_site_err"];
+									?>
 								</div>
 								<div class="form-field-wrapper">
 									<input type="text" name = "company_location" placeholder="Company Location"/>
@@ -278,6 +279,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "register"){
 								</div>
 								<div class="form-field-wrapper">
 									<input type="file"  name="company_image" id="company_image">
+									<?php if(!empty($inserts_error["company_image_err"]))
+										echo $inserts_error["company_image_err"];
+									?>
 								</div>
 							</div>		
 						</div>	

@@ -1,5 +1,5 @@
 <?php
-	include 'header.php';
+include 'header.php';
 ?>
 
 <main class="site-main">
@@ -20,12 +20,6 @@
 						<div class="form-field-wrapper">
 							<input type="checkbox" name="remember" value = 1  />Remember me
 						</div>
-
-						<?php 
-						 //include 'login_authentication.php';
-						 //include 'cookies.php';
-						?>
-
 						<button type="submit" name = "submit" value="login" class="button">
 							Login
 						</button>
