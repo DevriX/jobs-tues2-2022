@@ -3,6 +3,7 @@
 	require_once 'header.php'; 
 	require_once 'category_delete.php';
 	require_once 'pagination.php';
+	require_once 'category_add.php';
 ?>
 <main class="site-main">
 	<section class="section-fullwidth section-jobs-dashboard">
@@ -25,13 +26,10 @@
 								<div class="form-field-wrapper">
 									<input name="title" type="text" placeholder="Enter Category Name..."/>
 								</div>
-									<button type="submit" class="button">
+									<button type="submit" name = "submit" value = "add"class="button">
 										Add New
 									</button>		
-							</div>	
-							<?php 
-							require_once 'category_add.php';
-							?>			
+							</div>				
 						</form>
 					</div>
 				</div>

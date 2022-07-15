@@ -22,7 +22,6 @@ if(isset($_GET["id"])){
 			</ul>
 			<?php
 			$sql = "SELECT *, users.first_name, users.last_name, applications.user_id, applications.id 
-					-- AS APP_ID
 					FROM applications 
 					JOIN users 
 					ON users.id = applications.user_id 

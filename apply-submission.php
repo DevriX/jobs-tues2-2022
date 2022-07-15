@@ -88,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "apply"){
 								<input type="text" placeholder="Phone Number" value="<?php echo $user["phone_number"] ?>" />
 							</div>			
 							<div class="form-field-wrapper width-large">
-								<textarea name="custom_message" placeholder="Custom Message*"></textarea>
+								<textarea name="custom_message" placeholder="Custom Message*"><?php echo $user["custom_message"] ?></textarea>
 							</div>
 							<div class="form-field-wrapper width-large">
 								<input type="file" name="cv" id="cv">

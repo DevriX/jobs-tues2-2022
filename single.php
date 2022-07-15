@@ -18,7 +18,7 @@ $image_path = IMAGE_PATH.$row["company_image"];
 							<header class="job-header">
 								<h2 class="job-title"><a href="#"><?php echo  $row["title"] ?></a></h2>
 								<div class="job-meta">
-									<a class="meta-company" href="#"><?php echo  $row["company_name"] ?></a>
+									<a class="meta-company" href="<?php echo $row["company_site"]?>"><?php echo  $row["company_name"] ?></a>
 									<?php
 										if($row["Date"] == 0) {
 									?>

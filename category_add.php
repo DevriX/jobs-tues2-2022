@@ -1,5 +1,5 @@
 <?php
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "add"){
     $title = $_POST['title'];
     if(!empty($title)){
         $sql_duplicate = "SELECT * 

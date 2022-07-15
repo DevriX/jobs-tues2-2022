@@ -31,12 +31,11 @@ if(!isset($_COOKIE["login"])){
 							</div> 
 						</div>
 						<?php 
+							$drop_down = 1;
 							if (!empty($_GET['drop_down_menu'])) {
 								$drop_down = $_GET['drop_down_menu'];
 							} 
-							else {
-								$drop_down = 1;
-							}
+
 						?>
 						<div class="filter-wrapper">
 							<div class="filter-field-wrapper">
@@ -55,12 +54,10 @@ if(!isset($_COOKIE["login"])){
 			</div>
 			<ul class="jobs-listing">
 			<?php
+			$order_list = "jobs.date_posted DESC";
 			if(isset($_GET['drop_down_menu']) && $_GET['drop_down_menu'] == 2){
 				$order_list = "jobs.title ASC";
 			} 
-			else{
-				$order_list = "jobs.date_posted DESC";
-			}
 			$url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 			if(!empty($_GET["search"])){
 				$sql = search($order_list);
@@ -68,7 +65,7 @@ if(!isset($_COOKIE["login"])){
 			else {
 				$sql = "SELECT jobs.id, jobs.title, jobs.status, DATEDIFF( CURDATE(), jobs.date_posted) 
 						AS 'Date', users.phone_number, users.company_name, 
-						users.company_location, users.company_image
+						users.company_location, users.company_image, users.company_site
 						FROM jobs 
 						JOIN users 
 						ON users.id = jobs.user_id 
@@ -88,7 +85,7 @@ if(!isset($_COOKIE["login"])){
 					<div class="job-primary">
 						<h2 class="job-title"><a href="single.php?id=<?php echo $row["id"]?>"><?php echo  $row["title"] ?></a></h2>
 						<div class="job-meta">
-							<a class="meta-company" href="single.php?id=<?php echo $row["id"]?>"><?php echo  $row["company_name"] ?></a>
+							<a class="meta-company" href="<?php echo $row["company_site"]?>"><?php echo  $row["company_name"] ?></a>
 							<?php
 							if($row["Date"] == 0) {
 							?>
