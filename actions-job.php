@@ -68,7 +68,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "create"){
 		else {
 			echo "ERROR: " . $sql_request . "<br>";
 		}
-<<<<<<< HEAD
 	}
 }
 
@@ -110,52 +109,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "update"){
 					} 
 					else {
 						echo "ERROR: " . $sql_request1 . "<br>";
-=======
-
-		if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "update"){
-			//var_dump($job["id"]);die();
-			if(empty($_POST["title"])){
-				$inserts_error["title_err"] = "Title field required.";
-			}
-			else{
-				$insert_user["title"] = ($_POST["title"]);
-			}
-
-			if(empty($_POST["description"])){
-				$inserts_error["description_err"] = "Description field required.";
-			}
-			else{
-				$insert_user["description"] = ($_POST["description"]);
-			}
-
-			if(!empty($_POST["responsibilities"])){
-				$insert_user["responsibilities"] = ($_POST["responsibilities"]);
-			}
-
-			if(!empty($_POST["salary"])){
-				$insert_user["salary"] = ($_POST["salary"]);
-			}
-
-
-
-			if(empty($inserts_error)){
-				$sql_request = "UPDATE jobs SET user_id = '".$user['id']."', title =  '".$insert_user['title']."', status = 0, description =  '".$insert_user['description']."',  responsibilities =  '".$insert_user['responsibilities']."', salary = '".$insert_user['salary']."', date_posted = '".$date."'";
-				if ($con->query($sql_request) === TRUE) {
-					echo "Job Updated.";
-					$last_id = mysqli_insert_id($con);
-					$last_last_id = $id;
-					if(!empty($_POST["categories"])){
-						$sql_categories = "DELETE FROM  jobs_categories WHERE  jobs_categories.job_id = '".$id."'";
-						$res1 = $con->query($sql_categories); 
-						foreach($_POST["categories"] as $category){
-							 $sql_request1 = "INSERT INTO jobs_categories(job_id, category_id) VALUES($last_last_id, $category)";
-							if ($con->query($sql_request1) === TRUE) {
-								echo "Category updated.";
-							} else {
-								echo "ERROR: " . $sql_request1 . "<br>";
-							}
-						}
->>>>>>> 60c30bd5c454aaf4fb0eb6a786611e6f53cf40a2
 					}
 				}
 			}
@@ -239,70 +192,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "update"){
 								 ?>
 								</select>
 							</div>
-<<<<<<< HEAD
-=======
-							<form name="apply" action="" method="POST" enctype="multipart/form-data">
-								<div class="flex-container flex-wrap">
-									<div class="form-field-wrapper width-large">
-										<input type="text" name="title" value="<?php if(!empty($job["title"])) { echo $job["title"]; }?>" placeholder="Job title*"/>
-										<?php if(!empty($inserts_error["title_err"]))
-											echo $inserts_error["title_err"];
-										?>
-									</div>
-									<div class="form-field-wrapper width-large">
-										<input type="text" name="company_location" value="<?php if(!empty($job["company_location"])) { echo $job["company_location"]; }?>" placeholder="Location"/>
-										<?php if(!empty($inserts_error["location_err"]))
-											echo $inserts_error["location_err"];
-										?>
-									</div>
-									<div class="form-field-wrapper width-large">
-										<input type="text" name="salary" value="<?php if(!empty($job["salary"])) { echo $job["salary"]; }?>" placeholder="Salary"/>
-										<?php if(!empty($inserts_error["salary_err"]))
-											echo $inserts_error["salary_err"];
-										?>
-									</div>
-									<div class="form-field-wrapper width-large">
-										<textarea name="description" placeholder="Description*"><?php if(!empty($job["description"])) { echo $job["description"]; }?></textarea>
-										<?php if(!empty($inserts_error["description_err"]))
-											echo $inserts_error["description_err"];
-										?>
-									</div>	
-									<div class="form-field-wrapper width-large">
-										<textarea name="responsibilities" placeholder="Responsibilities"><?php if(!empty($job["responsibilities"])) { echo $job["responsibilities"]; }?></textarea>
-										<?php if(!empty($inserts_error["responsibilities_err"]))
-											echo $inserts_error["responsibilities_err"];
-										?>
-									</div>	
-									<div class="form-field-wrapper width-large">
-										<select multiple="multiple" name="categories[]">
-										<?php if(!empty($inserts_error["categories_err"]))
-											echo $inserts_error["categories_err"];
-										?>
-										<option style="text-align:center" disabled>
-											Select one or more categories:
-										</option>
-										<?php 
-											$request = $con->query("SELECT * FROM categories");
-											if(mysqli_num_rows($request) > 0) {
-												while($row = mysqli_fetch_array($request, MYSQLI_BOTH)){
-											?>
-												<option value="<?php echo $row['id']; ?>"><?php echo $row['title']; ?></option>
-											<?php }} ?>
-										</select>
-									</div>
-								</div>
-								<?php
-								if(!isset($id)) {?>
-								<button type="submit" name = "submit" value="create" class="button">
-									Create
-								</button>
-								<?php } else { ?>
-									<button type="submit" name = "submit" value="update" class="button">
-									Update
-								</button>
-								<?php }?>
-							</form>
->>>>>>> 60c30bd5c454aaf4fb0eb6a786611e6f53cf40a2
 						</div>
 						<?php
 						if(!isset($id)) {?>
