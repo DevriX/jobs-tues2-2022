@@ -10,31 +10,29 @@ require_once 'pagination.php';
 		<form name="search" action="" method="GET">
 			<?php
 				if(isset($_GET['filter'])){
-				
 					foreach($_GET['filter'] as $filter){
 			?>
-						<input type="hidden" name='filter[]' value='<?php echo $filter;?>'>
-					
+				<input type="hidden" name='filter[]' value='<?php echo $filter;?>'>	
 			<?php
 					}
 				}
 			?> 	
 			<ul class="tags-list">
 				<?php
-					$url = $_SERVER['REQUEST_URI'];
-					if(!strpos($url, "?")){
-						$url = $url."?";
-					}
+				$url = $_SERVER['REQUEST_URI'];
+				if(!strpos($url, "?")){
+					$url = $url."?";
+				}
 
-					$category = ShowCategory();
-					if(!empty($category)){
-						foreach($category as $row){	
-							$style = "";
-							if(isset($_GET['filter'])){
-								if(in_array($row['id'], $_GET['filter'])){
-									$style = 'style="background-color: #a1a9b5; pointer-events: none; cursor: default;"';
-								}
-							}	
+				$category = ShowCategory();
+				if(!empty($category)){
+					foreach($category as $row){	
+						$style = "";
+						if(isset($_GET['filter'])){
+							if(in_array($row['id'], $_GET['filter'])){
+								$style = 'style="background-color: #a1a9b5; pointer-events: none; cursor: default;"';
+							}
+						}	
 				?>	
 				<li class="list-item">
 					<a <?php echo $style; ?> href="<?php echo urldecode($url."&filter[]=".$row['id']);?>"  class="list-item-link"><?php echo $row['title'];?></a>
@@ -78,15 +76,13 @@ require_once 'pagination.php';
 
 				if(isset($_GET['drop_down_menu']) && $_GET['drop_down_menu'] == 2){
 					$order_list = "jobs.title ASC";
-				} else{
+				} 
+				else{
 					$order_list = "jobs.date_posted DESC";
 				}
 				
-				$url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-				
-
+				$url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];				
 				$sql = search_filter($order_list);
-				
 				
 				if(!empty($sql)){
 					$num_rows = mysqli_num_rows ($con->query($sql));
@@ -142,7 +138,6 @@ require_once 'pagination.php';
 				<?php 
 					pagination($page, $page_total);
 				?>
-			
 				</div>
 			</div>
 		</div>

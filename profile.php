@@ -73,6 +73,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] === "save"){
 				$insert_user["is_admin"] = 1;
 				echo "This is devrix email!\n";
 			}
+			else{
+				$insert_user["is_admin"] = 0;;
+			}
 		}
 	}
 
